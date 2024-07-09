@@ -16,4 +16,10 @@ $route['logout']['GET'] = 'DashboardController/logout';
 //Brand
 $route['brand/create']['GET'] = 'BrandController/create';
 $route['brand/list']['GET'] = 'BrandController/index';
+<<<<<<< HEAD
 $route['brand/store']['POST'] = 'BrandController/store';
+=======
+$route['brand/store']['POST'] = 'BrandController/store';
+$route['brand/edit/(:any)']['GET'] = 'BrandController/edit/$1';
+$route['brand/update/(:any)']['POST'] = 'BrandController/update/$1';
+>>>>>>> home
