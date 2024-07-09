@@ -19,13 +19,13 @@
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      <?php echo form_error('email'); ?>
+      <?php echo '<span class="text text-danger">' . form_error('email') . '</span>'; ?>
     </div>
 
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
       <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-      <?php echo form_error('password'); ?>
+      <?php echo '<span class="text text-danger">' . form_error('password') . '</span>'; ?>
     </div>
 
     <button type="submit" class="btn btn-primary">Login</button>
