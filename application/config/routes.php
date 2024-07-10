@@ -16,10 +16,15 @@ $route['logout']['GET'] = 'DashboardController/logout';
 //Brand
 $route['brand/create']['GET'] = 'BrandController/create';
 $route['brand/list']['GET'] = 'BrandController/index';
-<<<<<<< HEAD
-$route['brand/store']['POST'] = 'BrandController/store';
-=======
 $route['brand/store']['POST'] = 'BrandController/store';
 $route['brand/edit/(:any)']['GET'] = 'BrandController/edit/$1';
 $route['brand/update/(:any)']['POST'] = 'BrandController/update/$1';
->>>>>>> home
+$route['brand/delete/(:any)']['GET'] = 'BrandController/delete/$1';
+
+//Category
+$route['category/create']['GET'] = 'CategoryController/create';
+$route['category/list']['GET'] = 'CategoryController/index';
+$route['category/store']['POST'] = 'CategoryController/store';
+$route['category/edit/(:any)']['GET'] = 'CategoryController/edit/$1';
+$route['category/update/(:any)']['POST'] = 'CategoryController/update/$1';
+$route['category/delete/(:any)']['GET'] = 'CategoryController/delete/$1';

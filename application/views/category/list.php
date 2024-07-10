@@ -1,9 +1,9 @@
 <div class="container">
 	<div class="card" style="margin-top: 1rem;">
-		<h5 class="card-header">LIST BRAND</h5>
-
+		<h5 class="card-header">LIST Category</h5>
 		<div class="card-body">
-			
+
+		
 			<?php
 			if ($this->session->flashdata('success')) {
 			?>
@@ -16,7 +16,8 @@
 			}
 			?>
 
-			<a href="<?php echo base_url('brand/create') ?>" class="btn btn-primary">Add Brand</a>
+
+			<a href="<?php echo base_url('category/create') ?>" class="btn btn-primary">Add Category</a>
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -31,7 +32,7 @@
 				</thead>
 				<tbody>
 					<?php
-					foreach ($brand as $key => $bra) {
+					foreach ($category as $key => $bra) {
 					?>
 						<tr>
 							<th scope="row"><?= $key ?></th>
@@ -39,7 +40,7 @@
 							<td><?= $bra->slug ?></td>
 							<td><?= $bra->description ?></td>
 							<td>
-								<img style="max-width: 150px; max-height: 150px" src="<?php echo base_url('uploads/brand/' . $bra->image) ?>" alt="">
+								<img style="max-width: 150px; max-height: 150px" src="<?php echo base_url('uploads/category/' . $bra->image) ?>" alt="">
 							</td>
 							<td><?php
 								if ($bra->status == 1) {
@@ -49,8 +50,8 @@
 								}
 								?></td>
 							<td>
-								<a href="<?php echo base_url('brand/edit/' . $bra->id) ?>" class="btn btn-warning">Edit</a>
-								<a onclick="return confirm('Are you sure?')" href="<?php echo base_url('brand/delete/' . $bra->id) ?>" class="btn btn-danger">Delete</a>
+								<a href="<?php echo base_url('category/edit/' . $bra->id) ?>" class="btn btn-warning">Edit</a>
+								<a onclick="return confirm('Are you sure?')" href="<?php echo base_url('category/delete/' . $bra->id) ?>" class="btn btn-danger">Delete</a>
 							</td>
 						</tr>
 					<?php } ?>

@@ -2,12 +2,6 @@
 
 class BrandModel extends CI_Model
 {
-<<<<<<< HEAD
-    public function insertBrand($data)
-    {
-      return $this->db->insert('brands',$data);
-    }
-=======
 	public function insertBrand($data)
 	{
 		return $this->db->insert('brands', $data);
@@ -24,5 +18,14 @@ class BrandModel extends CI_Model
 		$query =  $this->db->get_where('brands', ['id' => $id]);
 		return $query->row();
 	}
->>>>>>> home
+
+	public function updateBrand($id, $data)
+	{
+		return $this->db->update('brands', $data, ['id' => $id]);
+	}
+
+	public function deleteBrand($id)
+	{
+		return $this->db->delete('brands', ['id' => $id]);
+	}
 }

@@ -2,7 +2,8 @@
 	<div class="card" style="margin-top: 1rem;">
 		<h5 class="card-header">Edit Brand</h5>
 		<div class="card-body">
-
+		<a href="<?php echo base_url('brand/create')?>" class="btn btn-primary">Create Brand</a>
+		<a href="<?php echo base_url('brand/list')?>" class="btn btn-success">List Brand</a>
 			<?php
 			if ($this->session->flashdata('success')) {
 			?>
