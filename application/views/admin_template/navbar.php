@@ -30,6 +30,7 @@
                         <a class="dropdown-item" href="<?php echo base_url('category/list'); ?>">List</a>
                     </div>
                 </li>
+<<<<<<< HEAD
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -40,6 +41,8 @@
                         <a class="dropdown-item" href="<?php echo base_url('product/list'); ?>">List</a>
                     </div>
                 </li>
+=======
+>>>>>>> 924b8ba5f842e096118a93a21ae441970bb5dd72
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
