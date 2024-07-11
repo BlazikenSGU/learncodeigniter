@@ -28,7 +28,7 @@ $route['category/store']['POST'] = 'CategoryController/store';
 $route['category/edit/(:any)']['GET'] = 'CategoryController/edit/$1';
 $route['category/update/(:any)']['POST'] = 'CategoryController/update/$1';
 $route['category/delete/(:any)']['GET'] = 'CategoryController/delete/$1';
-<<<<<<< HEAD
+
 
 //Product
 $route['product/create']['GET'] = 'ProductController/create';
@@ -37,5 +37,4 @@ $route['product/store']['POST'] = 'ProductController/store';
 $route['product/edit/(:any)']['GET'] = 'ProductController/edit/$1';
 $route['product/update/(:any)']['POST'] = 'ProductController/update/$1';
 $route['product/delete/(:any)']['GET'] = 'ProductController/delete/$1';
-=======
->>>>>>> 924b8ba5f842e096118a93a21ae441970bb5dd72
+

@@ -16,11 +16,7 @@
 			}
 			?>
 
-<<<<<<< HEAD
 			<a href="<?php echo base_url('brand/create') ?>" class="btn btn-primary">Create Brand</a>
-=======
-			<a href="<?php echo base_url('brand/create') ?>" class="btn btn-primary">Add Brand</a>
->>>>>>> 924b8ba5f842e096118a93a21ae441970bb5dd72
 			<table class="table table-striped">
 				<thead>
 					<tr>

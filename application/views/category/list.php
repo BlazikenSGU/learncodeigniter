@@ -1,10 +1,6 @@
 <div class="container">
 	<div class="card" style="margin-top: 1rem;">
-<<<<<<< HEAD
 		<h5 class="card-header">List Category</h5>
-=======
-		<h5 class="card-header">LIST Category</h5>
->>>>>>> 924b8ba5f842e096118a93a21ae441970bb5dd72
 		<div class="card-body">
 
 		
@@ -19,13 +15,7 @@
 			<?php
 			}
 			?>
-<<<<<<< HEAD
 			<a href="<?php echo base_url('category/create') ?>" class="btn btn-primary">Create Category</a>
-=======
-
-
-			<a href="<?php echo base_url('category/create') ?>" class="btn btn-primary">Add Category</a>
->>>>>>> 924b8ba5f842e096118a93a21ae441970bb5dd72
 			<table class="table table-striped">
 				<thead>
 					<tr>
