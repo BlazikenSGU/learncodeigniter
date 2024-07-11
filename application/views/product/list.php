@@ -1,9 +1,7 @@
 <div class="container">
 	<div class="card" style="margin-top: 1rem;">
-		<h5 class="card-header">LIST BRAND</h5>
-
+		<h5 class="card-header">List Product</h5>
 		<div class="card-body">
-			
 			<?php
 			if ($this->session->flashdata('success')) {
 			?>
@@ -15,13 +13,15 @@
 			<?php
 			}
 			?>
-
-			<a href="<?php echo base_url('brand/create') ?>" class="btn btn-primary">Create Brand</a>
+			<a href="<?php echo base_url('product/create') ?>" class="btn btn-primary">Create Product</a>
 			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th scope="col">#</th>
 						<th scope="col">Title</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Brand</th>
 						<th scope="col">Slug</th>
 						<th scope="col">Description</th>
 						<th scope="col">Image</th>
@@ -31,26 +31,29 @@
 				</thead>
 				<tbody>
 					<?php
-					foreach ($brand as $key => $bra) {
+					foreach ($product as $key => $prod) {
 					?>
 						<tr>
 							<th scope="row"><?= $key ?></th>
-							<td><?= $bra->title ?></td>
-							<td><?= $bra->slug ?></td>
-							<td><?= $bra->description ?></td>
+							<td><?= $prod->title ?></td>
+                            <td><?= $prod->quantity ?></td>
+                            <td><?= $prod->tendanhmuc ?></td>
+                            <td><?= $prod->tenthuonghieu ?></td>
+							<td><?= $prod->slug ?></td>
+							<td><?= $prod->description ?></td>
 							<td>
-								<img style="max-width: 150px; max-height: 150px" src="<?php echo base_url('uploads/brand/' . $bra->image) ?>" alt="">
+								<img style="max-width: 150px; max-height: 150px" src="<?php echo base_url('uploads/product/' . $prod->image) ?>" alt="">
 							</td>
 							<td><?php
-								if ($bra->status == 1) {
+								if ($prod->status == 1) {
 									echo 'Active';
 								} else {
 									echo 'Inactive';
 								}
 								?></td>
 							<td>
-								<a href="<?php echo base_url('brand/edit/' . $bra->id) ?>" class="btn btn-warning">Edit</a>
-								<a onclick="return confirm('Are you sure?')" href="<?php echo base_url('brand/delete/' . $bra->id) ?>" class="btn btn-danger">Delete</a>
+								<a href="<?php echo base_url('product/edit/' . $prod->id) ?>" class="btn btn-warning">Edit</a>
+								<a onclick="return confirm('Are you sure?')" href="<?php echo base_url('product/delete/' . $prod->id) ?>" class="btn btn-danger">Delete</a>
 							</td>
 						</tr>
 					<?php } ?>

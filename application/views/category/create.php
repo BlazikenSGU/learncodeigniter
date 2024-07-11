@@ -1,8 +1,8 @@
 <div class="container">
 	<div class="card" style="margin-top: 1rem;">
-		<h5 class="card-header">Create Brand</h5>
+		<h5 class="card-header">Create Category</h5>
 		<div class="card-body">
-			<a href="<?php echo base_url('brand/list') ?>" class="btn btn-success">List Brand</a>
+			<a href="<?php echo base_url('category/list') ?>" class="btn btn-success">List Category</a>
 			<?php
 			if ($this->session->flashdata('success')) {
 			?>
@@ -15,7 +15,7 @@
 			}
 			?>
 
-			<form action="<?php echo base_url('brand/store') ?>" method="POST" enctype="multipart/form-data">
+			<form action="<?php echo base_url('category/store') ?>" method="POST" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="exampleInputEmail1">Title</label>
 					<input name="title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">

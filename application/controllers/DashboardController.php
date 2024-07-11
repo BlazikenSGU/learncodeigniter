@@ -15,7 +15,7 @@ class DashboardController extends CI_Controller
 
     public function index()
     {
-        // $this->checkLogin();
+        $this->checkLogin();
         $this->load->view('admin_template/header');
         $this->load->view('admin_template/navbar');
         $this->load->view('dashboard/index');
@@ -24,7 +24,7 @@ class DashboardController extends CI_Controller
 
     public function logout()
     {
-        // $this->checkLogin();
+        $this->checkLogin();
         $this->session->unset_userdata('LoggedIn');
         $this->session->set_flashdata('message', 'Logout success');
         redirect(base_url('/login'));
