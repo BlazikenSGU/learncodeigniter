@@ -2,12 +2,16 @@
 
 class IndexModel extends CI_Model
 {
-    public function getallproduct()
+
+    public function getCategoryHome()
     {
-        $query = 'getallproduct';
-        return $query;
+        $query =  $this->db->get_where('categories', ['status' => 1]);
+        return $query->result();
+    }
+
+    public function getBrandHome()
+    {
+        $query =  $this->db->get_where('brands', ['status' => 1]);
+        return $query->result();
     }
 }
-
-
-?>
