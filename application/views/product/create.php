@@ -27,6 +27,11 @@
                     <input name="quantity" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                     <?php echo '<span class="text text-danger">' . form_error('quantity') . '</span>'; ?>
                 </div>
+				<div class="form-group">
+                    <label for="exampleInputEmail1">Price</label>
+                    <input name="price" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <?php echo '<span class="text text-danger">' . form_error('price') . '</span>'; ?>
+                </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Slug</label>
                     <input name="slug" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">

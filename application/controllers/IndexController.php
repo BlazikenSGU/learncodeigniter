@@ -15,6 +15,7 @@ class IndexController extends CI_Controller
 
 	public function index()
 	{
+		$this->data['allproduct'] = $this->IndexModel->getAllProduct();
 		$this->load->view('pages/template/header', $this->data);
 		$this->load->view('pages/template/slider');
 		$this->load->view('pages/home', $this->data);
@@ -23,16 +24,17 @@ class IndexController extends CI_Controller
 
 	public function category($id)
 	{
-		$this->load->view('pages/template/header');
-		$this->load->view('pages/template/slider');
-		$this->load->view('pages/category');
+		$this->data['category_product'] = $this->IndexModel->getCategoryProduct($id);
+		$this->load->view('pages/template/header', $this->data);
+		// $this->load->view('pages/template/slider');
+		$this->load->view('pages/category', $this->data);
 		$this->load->view('pages/template/footer');
 	}
 
 	public function brand($id)
 	{
 		$this->load->view('pages/template/header');
-		$this->load->view('pages/template/slider');
+		// $this->load->view('pages/template/slider');
 		$this->load->view('pages/brand');
 		$this->load->view('pages/template/footer');
 	}
@@ -41,7 +43,7 @@ class IndexController extends CI_Controller
 	{
 		$this->load->view('pages/template/header');
 		$this->load->view('pages/template/slider');
-		$this->load->view('pages/product-detail');
+		$this->load->view('pages/product_details');
 		$this->load->view('pages/template/footer');
 	}
 

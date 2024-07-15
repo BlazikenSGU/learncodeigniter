@@ -45,6 +45,7 @@ class ProductController extends CI_Controller
         $this->form_validation->set_rules('title', 'Title', 'trim|required', ['required' => 'You must provide a %s']);
         $this->form_validation->set_rules('slug', 'Slug', 'trim|required', ['required' => 'You must provide a %s']);
         $this->form_validation->set_rules('quantity', 'Quantity', 'trim|required', ['required' => 'You must provide a %s']);
+		$this->form_validation->set_rules('price', 'Price', 'trim|required', ['required' => 'You must provide a %s']);
         $this->form_validation->set_rules('description', 'Description', 'trim|required', ['required' => 'You must provide a %s']);
 
         if ($this->form_validation->run() == TRUE) {
@@ -70,6 +71,7 @@ class ProductController extends CI_Controller
                 $data = [
                     'title' => $this->input->post('title'),
                     'quantity' => $this->input->post('quantity'),
+					'price' => $this->input->post('price'),
                     'description' => $this->input->post('description'),
                     'slug' => $this->input->post('slug'),
                     'category_id' => $this->input->post('category_id'),
@@ -109,6 +111,7 @@ class ProductController extends CI_Controller
         $this->form_validation->set_rules('title', 'Title', 'trim|required', ['required' => 'You must provide a %s']);
         $this->form_validation->set_rules('slug', 'Slug', 'trim|required', ['required' => 'You must provide a %s']);
         $this->form_validation->set_rules('quantity', 'Quantity', 'trim|required', ['required' => 'You must provide a %s']);
+		$this->form_validation->set_rules('price', 'Price', 'trim|required', ['required' => 'You must provide a %s']);
         $this->form_validation->set_rules('description', 'Description', 'trim|required', ['required' => 'You must provide a %s']);
 
         if ($this->form_validation->run() == TRUE) {
@@ -135,6 +138,7 @@ class ProductController extends CI_Controller
                     $data = [
                         'title' => $this->input->post('title'),
                         'quantity' => $this->input->post('quantity'),
+						'price' => $this->input->post('price'),
                         'description' => $this->input->post('description'),
                         'slug' => $this->input->post('slug'),
                         'category_id' => $this->input->post('category_id'),
@@ -147,6 +151,7 @@ class ProductController extends CI_Controller
                 $data = [
                     'title' => $this->input->post('title'),
                     'quantity' => $this->input->post('quantity'),
+					'price' => $this->input->post('price'),
                     'description' => $this->input->post('description'),
                     'slug' => $this->input->post('slug'),
                     'category_id' => $this->input->post('category_id'),

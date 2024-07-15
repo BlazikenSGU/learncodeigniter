@@ -11,14 +11,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<title>Home | Shop Futsal</title>
-	<link href="frontend/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<?= base_url('frontend/css/bootstrap.min.css')?>" rel="stylesheet">
 	<!-- <link href="frontend/css/font-awesome.min.css" rel="stylesheet"> -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-	<link href="frontend/css/prettyPhoto.css" rel="stylesheet">
-	<link href="frontend/css/price-range.css" rel="stylesheet">
-	<link href="frontend/css/animate.css" rel="stylesheet">
-	<link href="frontend/css/main.css" rel="stylesheet">
-	<link href="frontend/css/responsive.css" rel="stylesheet">
+	<link href="<?= base_url('frontend/css/prettyPhoto.css')?>" rel="stylesheet">
+	<link href="<?= base_url('frontend/css/price-range.css')?>" rel="stylesheet">
+	<link href="<?= base_url('frontend/css/animate.css')?>" rel="stylesheet">
+	<link href="<?= base_url('frontend/css/main.css')?>" rel="stylesheet">
+	<link href="<?= base_url('frontend/css/responsive.css')?>" rel="stylesheet">
 	<!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -70,29 +70,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="logo pull-left">
 							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
 						</div>
-						<!-- <div class="btn-group pull-right">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									USA
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="#">Canada</a></li>
-									<li><a href="#">UK</a></li>
-								</ul>
-							</div>
-							
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									DOLLAR
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="#">Canadian Dollar</a></li>
-									<li><a href="#">Pound</a></li>
-								</ul>
-							</div>
-						</div> -->
+
 					</div>
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
@@ -131,7 +109,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 										<?php
 										foreach ($category as $key => $cate) {
 										?>
-											<li><a href="<?= $cate->id ?>"><?= $cate->title ?></a></li>
+											<li><a href="<?= base_url('danh-muc/' . $cate->id) ?>"><?= $cate->title ?></a></li>
 										<?php } ?>
 									</ul>
 								</li>
