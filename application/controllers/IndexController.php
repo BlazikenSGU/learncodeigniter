@@ -104,14 +104,91 @@ class IndexController extends CI_Controller
 			}
 		}
 		$this->cart->update($cart);
-		redirect(base_url() . 'gio-hang', 'refresh');
+		// redirect(base_url() . 'gio-hang', 'refresh');
+		redirect($_SERVER['HTTP_REFERER']);
+	}
+
+
+	public function checkout()
+	{
+		if ($this->session->userdata('LoggedInCustomer')) {
+			$this->load->view('pages/template/header', $this->data);
+			$this->load->view('pages/checkout');
+			$this->load->view('pages/template/footer');
+		} else {
+			redirect(base_url('/gio-hang'));
+		}
 	}
 
 	public function login()
 	{
 		$this->load->view('pages/template/header');
-		$this->load->view('pages/template/slider');
 		$this->load->view('pages/login');
 		$this->load->view('pages/template/footer');
+	}
+
+	public function logout()
+	{
+		$this->session->unset_userdata('LoggedInCustomer');
+		$this->session->set_flashdata('success', 'Logout success');
+		redirect(base_url('/dang-nhap'));
+	}
+
+	public function login_customer()
+	{
+		$this->form_validation->set_rules('email', 'Email', 'trim|required', ['required' => 'You must provide a %s']);
+		$this->form_validation->set_rules('password', 'Password', 'trim|required', ['required' => 'You must provide a %s']);
+
+		if ($this->form_validation->run()) {
+			$email = $this->input->post('email');
+			$password = md5($this->input->post('password'));
+			$this->load->model('LoginModel');
+			$result = $this->LoginModel->checkLoginCustomer($email, $password);
+
+			if ($result) {
+				$session_array = [
+					'id' => $result[0]->id,
+					'username' => $result[0]->name,
+					'email' => $result[0]->email,
+				];
+				$this->session->set_userdata('LoggedInCustomer', $session_array);
+				$this->session->set_flashdata('success', 'LOGIN SUCCESS');
+				redirect(base_url('/checkout'));
+			} else {
+				$this->session->set_flashdata('error', 'WRONG EMAIL OR PASSWORD');
+				redirect(base_url('/dang-nhap'));
+			}
+		} else {
+			$this->login();
+		}
+	}
+
+	public function signup()
+	{
+		$this->form_validation->set_rules('email', 'Email', 'trim|required', ['required' => 'You must provide a %s']);
+		$this->form_validation->set_rules('password', 'Password', 'trim|required', ['required' => 'You must provide a %s']);
+
+		if ($this->form_validation->run()) {
+			$email = $this->input->post('email');
+			$password = md5($this->input->post('password'));
+			$this->load->model('LoginModel');
+			$result = $this->LoginModel->checkLoginCustomer($email, $password);
+
+			if ($result) {
+				$session_array = [
+					'id' => $result[0]->id,
+					'username' => $result[0]->name,
+					'email' => $result[0]->email,
+				];
+				$this->session->set_userdata('LoggedInCustomer', $session_array);
+				$this->session->set_flashdata('success', 'LOGIN SUCCESS');
+				redirect(base_url('/checkout'));
+			} else {
+				$this->session->set_flashdata('error', 'WRONG EMAIL OR PASSWORD');
+				redirect(base_url('/dang-nhap'));
+			}
+		} else {
+			$this->login();
+		}
 	}
 }

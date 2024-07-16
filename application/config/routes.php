@@ -5,7 +5,7 @@ $route['default_controller'] = 'IndexController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-//home
+//home Index
 $route['danh-muc/(:any)']['GET'] = 'IndexController/category/$1';
 $route['thuong-hieu/(:any)']['GET'] = 'IndexController/brand/$1';
 $route['san-pham/(:any)']['GET'] = 'IndexController/product/$1';
@@ -15,6 +15,10 @@ $route['delete-all-cart']['GET'] = 'IndexController/delete_all_cart';
 $route['delete-item/(:any)']['GET'] = 'IndexController/delete_item/$1';
 $route['update-cart-item']['POST'] = 'IndexController/update_cart_item';
 $route['dang-nhap']['GET'] = 'IndexController/login';
+$route['dang-ky']['POST'] = 'IndexController/signup';
+$route['dang-xuat']['GET'] = 'IndexController/logout';
+$route['checkout']['GET'] = 'IndexController/checkout';
+$route['login-customer']['POST'] = 'IndexController/login_customer';
 
 //login
 $route['login']['GET'] = 'LoginController/index';
@@ -49,6 +53,4 @@ $route['product/edit/(:any)']['GET'] = 'ProductController/edit/$1';
 $route['product/update/(:any)']['POST'] = 'ProductController/update/$1';
 $route['product/delete/(:any)']['GET'] = 'ProductController/delete/$1';
 
-//cart
-// $route['cart']['GET'] = 'IndexController/cart';
-// $route['add-to-cart']['POST'] = 'IndexController/cart';
+

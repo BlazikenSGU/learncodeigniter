@@ -65,13 +65,18 @@
                             </tr>
                         <?php } ?>
                         <tr>
-                            <td>
-                                <a href="<?= base_url('delete-all-cart') ?>" class="btn btn-danger">DELETE ALL</a>
-                            </td>
+                           
                             <td>
                                 <p class="cart_total_price">Total: <?= number_format($total, 0, ',', '.') ?> vnd</p>
                             </td>
+							<td>
+                                <a href="<?= base_url('delete-all-cart') ?>" class="btn btn-danger">DELETE ALL</a>
+                            </td>
+							<td>
+                                <a href="<?= base_url('checkout') ?>" class="btn btn-success">PAY ORDER</a>
+                            </td>
 
+							
 
                         </tr>
                     </tbody>

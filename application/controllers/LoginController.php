@@ -24,6 +24,7 @@ class LoginController extends CI_Controller
 		$this->form_validation->set_rules('password', 'Password', 'trim|required', ['required' => 'You must provide a %s']);
 
 		if ($this->form_validation->run()) {
+			
 			$email = $this->input->post('email');
 			$password = md5($this->input->post('password'));
 			$this->load->model('LoginModel');
@@ -47,4 +48,6 @@ class LoginController extends CI_Controller
 			$this->index();
 		}
 	}
+
+
 }

@@ -11,18 +11,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<title>Home | Shop Futsal</title>
-	<link href="<?= base_url('frontend/css/bootstrap.min.css')?>" rel="stylesheet">
+	<link href="<?= base_url('frontend/css/bootstrap.min.css') ?>" rel="stylesheet">
 	<!-- <link href="frontend/css/font-awesome.min.css" rel="stylesheet"> -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-	<link href="<?= base_url('frontend/css/prettyPhoto.css')?>" rel="stylesheet">
-	<link href="<?= base_url('frontend/css/price-range.css')?>" rel="stylesheet">
-	<link href="<?= base_url('frontend/css/animate.css')?>" rel="stylesheet">
-	<link href="<?= base_url('frontend/css/main.css')?>" rel="stylesheet">
-	<link href="<?= base_url('frontend/css/responsive.css')?>" rel="stylesheet">
-	<!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
+	<link href="<?= base_url('frontend/css/prettyPhoto.css') ?>" rel="stylesheet">
+	<link href="<?= base_url('frontend/css/price-range.css') ?>" rel="stylesheet">
+	<link href="<?= base_url('frontend/css/animate.css') ?>" rel="stylesheet">
+	<link href="<?= base_url('frontend/css/main.css') ?>" rel="stylesheet">
+	<link href="<?= base_url('frontend/css/responsive.css') ?>" rel="stylesheet">
+
 	<link rel="shortcut icon" href="images/ico/favicon.ico">
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
@@ -75,11 +72,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="<?= base_url('gio-hang')?>"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+
+								<?php
+								if ($this->session->userdata('LoggedInCustomer')) {
+								?>
+									<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+									<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
+									<li><a href="<?= base_url('checkout') ?>"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+									<li><a href="<?= base_url('dang-xuat') ?>"><i class="fa fa-lock"></i> Logout</a></li>
+								<?php
+								} else {
+								?>
+									<li><a href="<?= base_url('dang-nhap') ?>"><i class="fa fa-lock"></i> Login</a></li>
+								<?php
+								}
+								?>
+								<li><a href="<?= base_url('gio-hang') ?>"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 							</ul>
 						</div>
 					</div>
