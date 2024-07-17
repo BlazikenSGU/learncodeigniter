@@ -120,6 +120,53 @@ class IndexController extends CI_Controller
 		}
 	}
 
+	public function confirmCheckout()
+	{
+		$this->form_validation->set_rules('name', 'Name', 'trim|required', ['required' => 'You must provide a %s']);
+		$this->form_validation->set_rules('address', 'Address', 'trim|required', ['required' => 'You must provide a %s']);
+		$this->form_validation->set_rules('phone', 'Phone', 'trim|required', ['required' => 'You must provide a %s']);
+		$this->form_validation->set_rules('email', 'Email', 'trim|required', ['required' => 'You must provide a %s']);
+		$this->form_validation->set_rules('shipMethod', 'ShipMethod', 'trim|required', ['required' => 'You must provide a %s']);
+
+		if ($this->form_validation->run() == TRUE) {
+
+			$email = $this->input->post('email');
+			$shipMethod = $this->input->post('shipMethod');
+			$name = $this->input->post('name');
+			$phone = $this->input->post('phone');
+			$address = $this->input->post('address');
+
+			$data = array(
+				'email' => $email,
+				'name' => $name,
+				'method' => $shipMethod,
+				'phone' => $phone,
+				'address' => $address,
+			);
+
+			$this->load->model('LoginModel');
+			$result = $this->LoginModel->newShipping($data);
+			if ($result) {
+
+				$order_code = rand(00,9999);
+				$data_order = array(
+					'order_code' => $order_code,
+					'ship_id' => $result,
+					'status' => 1
+				);
+				
+				$insert_order = $this->LoginModel->insert_order($data_order);
+				$this->session->set_flashdata('success', 'DONE !');
+				redirect(base_url('/checkout'));
+			} else {
+				$this->session->set_flashdata('error', 'PAYMENT FAILLL');
+				redirect(base_url('/checkout'));
+			}
+		} else {
+			$this->checkout();
+		}
+	}
+
 	public function login()
 	{
 		$this->load->view('pages/template/header');
@@ -167,18 +214,33 @@ class IndexController extends CI_Controller
 	{
 		$this->form_validation->set_rules('email', 'Email', 'trim|required', ['required' => 'You must provide a %s']);
 		$this->form_validation->set_rules('password', 'Password', 'trim|required', ['required' => 'You must provide a %s']);
+		$this->form_validation->set_rules('name', 'Name', 'trim|required', ['required' => 'You must provide a %s']);
+		$this->form_validation->set_rules('phone', 'Phone', 'trim|required', ['required' => 'You must provide a %s']);
+		$this->form_validation->set_rules('address', 'Address', 'trim|required', ['required' => 'You must provide a %s']);
 
 		if ($this->form_validation->run()) {
 			$email = $this->input->post('email');
 			$password = md5($this->input->post('password'));
+			$name = $this->input->post('name');
+			$phone = $this->input->post('phone');
+			$address = $this->input->post('address');
+
+			$data = array(
+				'email' => $email,
+				'name' => $name,
+				'password' => $password,
+				'phone' => $phone,
+				'address' => $address,
+			);
+
+
 			$this->load->model('LoginModel');
-			$result = $this->LoginModel->checkLoginCustomer($email, $password);
+			$result = $this->LoginModel->newCustomer($data);
 
 			if ($result) {
 				$session_array = [
-					'id' => $result[0]->id,
-					'username' => $result[0]->name,
-					'email' => $result[0]->email,
+					'username' => $name,
+					'email' => $email,
 				];
 				$this->session->set_userdata('LoggedInCustomer', $session_array);
 				$this->session->set_flashdata('success', 'LOGIN SUCCESS');

@@ -95,17 +95,32 @@
 					<div class="col-sm-10 col-sm-offset-1">
 						<div class="login-form">
 							<!--login form-->
+							<?php
+							if ($this->session->flashdata('success')) {
+							?>
+								<div class="alert alert-success"><?php echo $this->session->flashdata('success') ?></div>
+							<?php
+							} elseif ($this->session->flashdata('error')) {
+							?>
+								<div class="alert alert-danger"><?php echo $this->session->flashdata('error') ?></div>
+							<?php
+							}
+							?>
 							<h2>Infomation Receive</h2>
-							<form action="" onsubmit="return confirm('Xac nhan dat hang?')" method="POST">
+							<form action="<?= base_url('confirmCheckout') ?>" onsubmit="return confirm('Xac nhan dat hang?')" method="POST">
 								<input type="text" name="name" placeholder="Name" />
+								<?= form_error('name'); ?>
 								<input type="text" name="address" placeholder="Address" />
+								<?= form_error('address'); ?>
 								<input type="text" name="phone" placeholder="Phone" />
+								<?= form_error('phone'); ?>
 								<input type="text" name="email" placeholder="Email" />
+								<?= form_error('email'); ?>
 								<label for="">Hinh thuc thanh toan: </label>
-								<select name="hinhthucthanhtoan">
-									<option>COD</option>
-									<option>VNPAY</option>
-									<option>MOMO</option>
+								<select name="shipMethod">
+									<option value="cod">COD</option>
+									<option value="vnpay">VNPAY</option>
+									<option value="momo">MOMO</option>
 								</select>
 
 								<button type="submit" class="btn btn-default">Confirm Payment</button>

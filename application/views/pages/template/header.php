@@ -76,7 +76,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<?php
 								if ($this->session->userdata('LoggedInCustomer')) {
 								?>
-									<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+									<li><a href="#"><i class="fa fa-user"></i> Account: <?= $this->session->userdata('LoggedInCustomer')['username'] ?></a></li>
 									<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
 									<li><a href="<?= base_url('checkout') ?>"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 									<li><a href="<?= base_url('dang-xuat') ?>"><i class="fa fa-lock"></i> Logout</a></li>

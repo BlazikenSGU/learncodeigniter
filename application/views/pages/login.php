@@ -37,10 +37,15 @@
 					<h2>New User Signup!</h2>
 					<form action="<?= base_url('dang-ky')?>" method="POST">
 						<input type="text" name="name" placeholder="Name" />
+						<?= form_error('name'); ?>
 						<input type="email" name="email" placeholder="Email" />
-						<input type="phone" name="phone" placeholder="Phone" />
-						<input type="address" name="address" placeholder="Address" />
+						<?= form_error('email'); ?>
+						<input type="text" name="phone" placeholder="Phone" />
+						<?= form_error('phone'); ?>
+						<input type="text" name="address" placeholder="Address" />
+						<?= form_error('address'); ?>
 						<input type="password" name="password" placeholder="Password" />
+						<?= form_error('password'); ?>
 						<button type="submit" class="btn btn-default">Signup</button>
 					</form>
 				</div>
