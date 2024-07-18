@@ -104,14 +104,13 @@ class IndexController extends CI_Controller
 			}
 		}
 		$this->cart->update($cart);
-		// redirect(base_url() . 'gio-hang', 'refresh');
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 
 
 	public function checkout()
 	{
-		if ($this->session->userdata('LoggedInCustomer')) {
+		if ($this->session->userdata('LoggedInCustomer') && $this->cart->contents()) {
 			$this->load->view('pages/template/header', $this->data);
 			$this->load->view('pages/checkout');
 			$this->load->view('pages/template/footer');
@@ -148,16 +147,30 @@ class IndexController extends CI_Controller
 			$result = $this->LoginModel->newShipping($data);
 			if ($result) {
 
-				$order_code = rand(00,9999);
+				//order
+				$order_code = rand(00, 9999);
 				$data_order = array(
 					'order_code' => $order_code,
 					'ship_id' => $result,
 					'status' => 1
 				);
-				
+
 				$insert_order = $this->LoginModel->insert_order($data_order);
+
+				//order_details
+				foreach ($this->cart->contents() as $item) {
+					$data_order_details = array(
+						'order_code' => $order_code,
+						'product_id' => $item['id'],
+						'quantity' => $item['qty'],
+					);
+
+					$insert_order_details = $this->LoginModel->insert_order_details($data_order_details);
+				}
+
 				$this->session->set_flashdata('success', 'DONE !');
-				redirect(base_url('/checkout'));
+				$this->cart->destroy();
+				redirect(base_url('/thanks'));
 			} else {
 				$this->session->set_flashdata('error', 'PAYMENT FAILLL');
 				redirect(base_url('/checkout'));
@@ -252,5 +265,12 @@ class IndexController extends CI_Controller
 		} else {
 			$this->login();
 		}
+	}
+
+	public function thanks()
+	{
+		$this->load->view('pages/template/header', $this->data);
+		$this->load->view('pages/thanks');
+		$this->load->view('pages/template/footer');
 	}
 }

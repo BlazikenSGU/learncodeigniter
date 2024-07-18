@@ -20,7 +20,10 @@ $route['dang-xuat']['GET'] = 'IndexController/logout';
 $route['checkout']['GET'] = 'IndexController/checkout';
 $route['confirmCheckout']['POST'] = 'IndexController/confirmCheckout';
 $route['login-customer']['POST'] = 'IndexController/login_customer';
+$route['thanks']['GET'] = 'IndexController/thanks';
 
+
+//ADMIN
 //login
 $route['login']['GET'] = 'LoginController/index';
 $route['login-user']['POST'] = 'LoginController/login';
@@ -45,7 +48,6 @@ $route['category/edit/(:any)']['GET'] = 'CategoryController/edit/$1';
 $route['category/update/(:any)']['POST'] = 'CategoryController/update/$1';
 $route['category/delete/(:any)']['GET'] = 'CategoryController/delete/$1';
 
-
 //Product
 $route['product/create']['GET'] = 'ProductController/create';
 $route['product/list']['GET'] = 'ProductController/index';
@@ -54,4 +56,6 @@ $route['product/edit/(:any)']['GET'] = 'ProductController/edit/$1';
 $route['product/update/(:any)']['POST'] = 'ProductController/update/$1';
 $route['product/delete/(:any)']['GET'] = 'ProductController/delete/$1';
 
-
+//order
+$route['order/list']['GET'] = 'OrderController/index';
+$route['order/view/(:any)']['GET'] = 'OrderController/view/$1';
