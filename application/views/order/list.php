@@ -43,7 +43,7 @@
                                 if ($ord->status == 1) {
                                     echo '<span class="text text-primary">Dang xu ly</span>';
                                 } elseif($ord->status == 2) {
-                                    echo '<span class="text text-success">Da giao hang</span>';
+                                    echo '<span class="text text-success">Dang giao hang</span>';
                                 }else{
                                     echo '<span class="text text-danger">Da huy</span>';
                                 }

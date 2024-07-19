@@ -75,4 +75,15 @@ class IndexModel extends CI_Model
             ->get();
         return $query->result();
     }
+
+    public function getProductTitle($id)
+    {
+        $this->db->select('products.*');
+        $this->db->from('products');
+        $this->db->limit(1);
+        $this->db->where('products.id', $id);
+        $query = $this->db->get();
+        $result = $query->row();
+        return $title = $result->title;
+    }
 }

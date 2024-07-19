@@ -19,7 +19,7 @@
             <form action="<?php echo base_url('product/update/' . $product->id) ?>" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Title</label>
-                    <input name="title" value="<?= $product->title ?>" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input name="title" value="<?= $product->title ?>" type="text" class="form-control" id="slug" onkeyup="ChangeToSlug();" aria-describedby="emailHelp">
                     <?php echo '<span class="text text-danger">' . form_error('title') . '</span>'; ?>
                 </div>
 
@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Slug</label>
-                    <input name="slug" type="text" value="<?= $product->slug ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input name="slug" type="text" value="<?= $product->slug ?>" class="form-control" id="convert_slug" aria-describedby="emailHelp">
                     <?php echo '<span class="text text-danger">' . form_error('slug') . '</span>'; ?>
                 </div>
                 <div class="form-group">

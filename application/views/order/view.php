@@ -49,13 +49,32 @@
 
                         </tr>
                     <?php } ?>
-                    <tr><td></td>
-                    <td></td>
+                    <tr>
+                        <td></td>
+                        <td></td>
                         <td>
-                            <select class="xulidonhang form-control" name="" id="">
-                                <option value="0">--- Xu li don hang ---</option>
-                                <option value="2">Dang giao hang</option>
-                                <option value="3">Huy don</option>
+                            <select class="xulidonhang form-control">
+                                <?php
+                                if ($ord->order_status == 1) {
+                                ?>
+                                    <option selected id="<?= $ord->order_code ?>" value="0">--- Xu li don hang ---</option>
+                                    <option id="<?= $ord->order_code ?>" value="2">Dang giao hang</option>
+                                    <option id="<?= $ord->order_code ?>" value="3">Huy don</option>
+                                <?php
+                                } elseif ($ord->order_status == 2) {
+
+
+                                ?>
+                                    <option id="<?= $ord->order_code ?>" value="0">--- Xu li don hang ---</option>
+                                    <option selected id="<?= $ord->order_code ?>" value="2">Dang giao hang</option>
+                                    <option id="<?= $ord->order_code ?>" value="3">Huy don</option>
+                                <?php
+                                } else {
+                                ?>
+                                    <option id="<?= $ord->order_code ?>" value="0">--- Xu li don hang ---</option>
+                                    <option id="<?= $ord->order_code ?>" value="2">Dang giao hang</option>
+                                    <option selected id="<?= $ord->order_code ?>" value="3">Huy don</option>
+                                <?php } ?>
                             </select>
                         </td>
                     </tr>

@@ -11,7 +11,7 @@
                         ?>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="<?= base_url('danh-muc/' . $cate->id) ?>"><?= $cate->title ?></a></h4>
+                                    <h4 class="panel-title"><a href="<?= base_url('danh-muc/' . $cate->id . '/' . $cate->slug) ?>"><?= $cate->title ?></a></h4>
                                 </div>
                             </div>
                         <?php } ?>
@@ -27,7 +27,7 @@
                                 <?php
                                 foreach ($brand as $key => $bra) {
                                 ?>
-                                    <li><a href="<?= base_url('thuong-hieu/' . $bra->id) ?>"><?= $bra->title ?></a></li>
+                                    <li><a href="<?= base_url('thuong-hieu/' . $bra->id . '/' . $bra->slug) ?>"><?= $bra->title ?></a></li>
                                 <?php } ?>
                             </ul>
                         </div>
@@ -61,7 +61,7 @@
                         <div class="col-sm-5">
                             <div class="view-product">
                                 <img src="<?= base_url('uploads/product/' . $pro->image) ?>" alt="<?= $pro->title ?>" />
-                                <!-- <h3>ZOOM</h3> -->
+
                             </div>
                             <div id="similar-product" class="carousel slide" data-ride="carousel">
                                 <!-- <div class="carousel-inner">
@@ -95,10 +95,10 @@
                         <form action="<?= base_url('add-to-cart') ?>" method="POST">
                             <div class="col-sm-7">
                                 <div class="product-information">
-                                    <!--/product-information-->
+
                                     <img src="images/product-details/new.jpg" class="newarrival" alt="" />
                                     <h2><?= $pro->title ?></h2>
-                                    <!-- <p>Web ID: 1089772</p> -->
+
                                     <input type="hidden" value="<?= $pro->id ?>" name="product_id">
                                     <img src="images/product-details/rating.png" alt="" />
                                     <span>
