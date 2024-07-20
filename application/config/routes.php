@@ -21,6 +21,11 @@ $route['checkout']['GET'] = 'IndexController/checkout';
 $route['confirmCheckout']['POST'] = 'IndexController/confirmCheckout';
 $route['login-customer']['POST'] = 'IndexController/login_customer';
 $route['thanks']['GET'] = 'IndexController/thanks';
+$route['tim-kiem']['GET'] = 'IndexController/tim_kiem';
+
+//pagination
+$route['pagination/(:num)'] = 'IndexController/index/$1';
+$route['pagination'] = 'IndexController/';
 
 
 //ADMIN

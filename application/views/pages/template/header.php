@@ -132,9 +132,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</ul>
 						</div>
 					</div>
+
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search" />
+							<form style="display: flex;" method="GET" autocomplete="off" action="<?= base_url('tim-kiem') ?>">
+								<input type="text" name="keyword" placeholder="Search product ..." />
+								<input style="width: fit-content;" type="submit" value="search" class="btn btn-default" placeholder="Search product ..." />
+							</form>
 						</div>
 					</div>
 				</div>

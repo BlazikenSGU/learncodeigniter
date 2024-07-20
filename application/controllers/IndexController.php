@@ -10,14 +10,48 @@ class IndexController extends CI_Controller
 		parent::__construct();
 		$this->load->model('IndexModel');
 		$this->load->library('cart');
+		$this->load->library('pagination');
 		$this->data['category'] = $this->IndexModel->getCategoryHome();
 		$this->data['brand'] = $this->IndexModel->getBrandHome();
 	}
 
 	public function index()
 	{
+
+		//custom config link
+		$config = array();
+		$config["base_url"] = base_url() . '/pagination';
+		$config['total_rows'] = ceil($this->IndexModel->countAllProduct()); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
+		var_dump($config['total_rows']);
+		$config["per_page"] = 3; //từng trang 3 sản phẩn
+		$config["uri_segment"] = 2; //lấy số trang hiện tại
+		$config['use_page_numbers'] = TRUE; //trang có số
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		//end custom config link
+		$this->pagination->initialize($config); //tự động tạo trang
+		$this->page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0; //current page active 
+		$this->data["links"] = $this->pagination->create_links(); //tự động tạo links phân trang dựa vào trang hiện tại
+		$this->data['allproduct_pagination'] = $this->IndexModel->getIndexPagination($config["per_page"], $this->page);
+		// //pagination
+
+
 		$this->config->config['pageTitle'] = 'Shop TF Futsal';
-		$this->data['allproduct'] = $this->IndexModel->getAllProduct();
+		// $this->data['allproduct'] = $this->IndexModel->getAllProduct();
 		$this->load->view('pages/template/header', $this->data);
 		$this->load->view('pages/template/slider');
 		$this->load->view('pages/home', $this->data);
@@ -28,7 +62,7 @@ class IndexController extends CI_Controller
 	{
 		$this->data['category_product'] = $this->IndexModel->getCategoryProduct($id);
 		$this->data['title'] = $this->IndexModel->getCategoryTitle($id);
-		$this->config->config['pageTitle']= $this->data['title'];
+		$this->config->config['pageTitle'] = $this->data['title'];
 		$this->load->view('pages/template/header', $this->data);
 		$this->load->view('pages/category', $this->data);
 		$this->load->view('pages/template/footer');
@@ -38,7 +72,7 @@ class IndexController extends CI_Controller
 	{
 		$this->data['brand_product'] = $this->IndexModel->getBrandProduct($id);
 		$this->data['title'] = $this->IndexModel->getBrandTitle($id);
-		$this->config->config['pageTitle']= $this->data['title'];
+		$this->config->config['pageTitle'] = $this->data['title'];
 		$this->load->view('pages/template/header', $this->data);
 		$this->load->view('pages/brand', $this->data);
 		$this->load->view('pages/template/footer');
@@ -49,7 +83,7 @@ class IndexController extends CI_Controller
 
 		$this->data['product_details'] = $this->IndexModel->getProductDetails($id);
 		$this->data['title'] = $this->IndexModel->getProductTitle($id);
-		$this->config->config['pageTitle']= $this->data['title'];
+		$this->config->config['pageTitle'] = $this->data['title'];
 		$this->load->view('pages/template/header', $this->data);
 		$this->load->view('pages/product_details', $this->data);
 		$this->load->view('pages/template/footer');
@@ -57,7 +91,7 @@ class IndexController extends CI_Controller
 
 	public function cart()
 	{
-		$this->config->config['pageTitle']= 'Cart';
+		$this->config->config['pageTitle'] = 'Cart';
 		$this->load->view('pages/template/header', $this->data);
 		$this->load->view('pages/cart');
 		$this->load->view('pages/template/footer');
@@ -114,7 +148,7 @@ class IndexController extends CI_Controller
 
 	public function checkout()
 	{
-		$this->config->config['pageTitle']= 'Checkout Payment';
+		$this->config->config['pageTitle'] = 'Checkout Payment';
 		if ($this->session->userdata('LoggedInCustomer') && $this->cart->contents()) {
 			$this->load->view('pages/template/header', $this->data);
 			$this->load->view('pages/checkout');
@@ -187,7 +221,7 @@ class IndexController extends CI_Controller
 
 	public function login()
 	{
-		$this->config->config['pageTitle']= 'Login User | Register User';
+		$this->config->config['pageTitle'] = 'Login User | Register User';
 		$this->load->view('pages/template/header');
 		$this->load->view('pages/login');
 		$this->load->view('pages/template/footer');
@@ -275,9 +309,23 @@ class IndexController extends CI_Controller
 
 	public function thanks()
 	{
-		$this->config->config['pageTitle']= 'Thanks';
+		$this->config->config['pageTitle'] = 'Thanks';
 		$this->load->view('pages/template/header', $this->data);
 		$this->load->view('pages/thanks');
+		$this->load->view('pages/template/footer');
+	}
+	public function tim_kiem()
+	{
+		$keyword2 = '';
+		if (isset($_GET['keyword']) && $_GET['keyword'] != '') {
+			$keyword = $_GET['keyword'];
+		}
+		$this->data['product'] = $this->IndexModel->getProductyKeyword($keyword);
+		$this->data['title'] = $keyword;
+		$this->data['no_product'] = $keyword2;
+		$this->config->config['pageTitle'] = 'Search: ' . $keyword;
+		$this->load->view('pages/template/header', $this->data);
+		$this->load->view('pages/search', $this->data);
 		$this->load->view('pages/template/footer');
 	}
 }
