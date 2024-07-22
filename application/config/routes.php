@@ -25,8 +25,12 @@ $route['tim-kiem']['GET'] = 'IndexController/tim_kiem';
 
 //pagination
 $route['pagination/(:num)'] = 'IndexController/index/$1';
-$route['pagination'] = 'IndexController/';
-
+$route['pagination'] = 'IndexController';
+$route['danh-muc/(:any)/(:any)/(:any)']['GET'] = 'IndexController/category/$1/$2/$3';
+$route['thuong-hieu/(:any)/(:any)/(:any)']['GET'] = 'IndexController/brand/$1/$2/$3';
+$route['tim-kiem/(:any)']['GET'] = 'IndexController/tim_kiem/$1';
+//email
+$route['test-mail'] = 'IndexController/send_mail';
 
 //ADMIN
 //login

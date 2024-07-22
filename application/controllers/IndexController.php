@@ -11,21 +11,95 @@ class IndexController extends CI_Controller
 		$this->load->model('IndexModel');
 		$this->load->library('cart');
 		$this->load->library('pagination');
+		$this->load->library('email');
 		$this->data['category'] = $this->IndexModel->getCategoryHome();
 		$this->data['brand'] = $this->IndexModel->getBrandHome();
 	}
 
+	public function send_mail()
+	{
+		$config = array();
+		$config['protocol'] = 'smtp';
+		$config['smtp_host'] = 'ssl://smtp.gmail.com';
+		$config['smtp_user'] = 'truongnhat.nguyen.41@gmail.com';
+		$config['smtp_pass'] = 'eevsknwmetgajtxe';
+		$config['smtp_port'] = 465;
+		$config['charset'] = 'utf-8';
+		$this->email->initialize($config);
+		$this->email->set_newline("\r\n");
+
+		//config_mail
+		$this->email->from('truongnhat.nguyen.41@gmail.com', 'Shop Shoe Futsal');
+		$this->email->to('truongnhat.nguyen.41@gmail.com');
+		// $this->email->cc('another@another-example.com'); // gui 1 ban copy cho 1 hoac nhieu nguoi
+		// $this->email->bcc('them@their-example.com'); // gui 1 ban copy cho 1 hoac nhieu nguoi && se k thay info ng gui hay nguoi nhan
+
+		$this->email->subject('Email test'); // tieu de
+		$this->email->message('Testing the email class'); //noi dung
+
+		//send mail
+		$this->email->send();
+	}
+
+
+
 	public function index()
 	{
-
 		//custom config link
 		$config = array();
 		$config["base_url"] = base_url() . '/pagination';
 		$config['total_rows'] = ceil($this->IndexModel->countAllProduct()); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
-		var_dump($config['total_rows']);
 		$config["per_page"] = 3; //từng trang 3 sản phẩn
 		$config["uri_segment"] = 2; //lấy số trang hiện tại
 		$config['use_page_numbers'] = TRUE; //trang có số
+
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		//end custom config link
+
+		$this->pagination->initialize($config); //tự động tạo trang
+		$page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 1; //current page active 
+		$offset = ($page - 1) * $config['per_page'];
+		$this->data["links"] = $this->pagination->create_links(); //tự động tạo links phân trang dựa vào trang hiện tại
+		$this->data['allproduct_pagination'] = $this->IndexModel->getIndexPagination($config["per_page"], $offset); // lay san pham
+		// //pagination
+
+
+		$this->config->config['pageTitle'] = 'Shop TF Futsal';
+		// $this->data['allproduct'] = $this->IndexModel->getAllProduct();
+		$this->load->view('pages/template/header', $this->data);
+		$this->load->view('pages/template/slider');
+
+		$this->load->view('pages/home', $this->data);
+		$this->load->view('pages/template/footer');
+	}
+
+	public function category($id)
+	{
+
+		$this->data['slug'] = $this->IndexModel->getCategorySlug($id);
+		//custom config link
+		$config = array();
+		$config["base_url"] = base_url() . '/danh-muc' . '/' . $id . '/' . $this->data['slug'];
+		$config['total_rows'] = ceil($this->IndexModel->countAllProductByCate($id)); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
+		$config["per_page"] = 3; //từng trang 3 sản phẩn
+		$config["uri_segment"] = 4; //lấy số trang hiện tại
+		$config['use_page_numbers'] = TRUE; //trang có số
+
 		$config['full_tag_open'] = '<ul class="pagination">';
 		$config['full_tag_close'] = '</ul>';
 		$config['first_link'] = 'First';
@@ -44,23 +118,13 @@ class IndexController extends CI_Controller
 		$config['prev_tag_close'] = '</li>';
 		//end custom config link
 		$this->pagination->initialize($config); //tự động tạo trang
-		$this->page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0; //current page active 
+		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 1; //current page active 
+		$offset = ($page - 1) * $config['per_page'];
 		$this->data["links"] = $this->pagination->create_links(); //tự động tạo links phân trang dựa vào trang hiện tại
-		$this->data['allproduct_pagination'] = $this->IndexModel->getIndexPagination($config["per_page"], $this->page);
+		$this->data['allproductbycate_pagination'] = $this->IndexModel->getCatePagination($id, $config["per_page"], $offset);
 		// //pagination
 
-
-		$this->config->config['pageTitle'] = 'Shop TF Futsal';
-		// $this->data['allproduct'] = $this->IndexModel->getAllProduct();
-		$this->load->view('pages/template/header', $this->data);
-		$this->load->view('pages/template/slider');
-		$this->load->view('pages/home', $this->data);
-		$this->load->view('pages/template/footer');
-	}
-
-	public function category($id)
-	{
-		$this->data['category_product'] = $this->IndexModel->getCategoryProduct($id);
+		// $this->data['category_product'] = $this->IndexModel->getCategoryProduct($id);
 		$this->data['title'] = $this->IndexModel->getCategoryTitle($id);
 		$this->config->config['pageTitle'] = $this->data['title'];
 		$this->load->view('pages/template/header', $this->data);
@@ -70,7 +134,41 @@ class IndexController extends CI_Controller
 
 	public function brand($id)
 	{
-		$this->data['brand_product'] = $this->IndexModel->getBrandProduct($id);
+
+		$this->data['slug'] = $this->IndexModel->getBrandSlug($id);
+		//custom config link
+		$config = array();
+		$config["base_url"] = base_url() . '/thuong-hieu' . '/' . $id . '/' . $this->data['slug'];
+		$config['total_rows'] = ceil($this->IndexModel->countAllProductByBrand($id)); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
+		$config["per_page"] = 3; //từng trang 3 sản phẩn
+		$config["uri_segment"] = 4; //lấy số trang hiện tại
+		$config['use_page_numbers'] = TRUE; //trang có số
+
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		//end custom config link
+		$this->pagination->initialize($config); //tự động tạo trang
+		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 1; //current page active 
+		$offset = ($page - 1) * $config['per_page'];
+		$this->data["links"] = $this->pagination->create_links(); //tự động tạo links phân trang dựa vào trang hiện tại
+		$this->data['allproductbybrand_pagination'] = $this->IndexModel->getBrandPanigation($id, $config["per_page"], $offset);
+		// //pagination
+
+		// $this->data['brand_product'] = $this->IndexModel->getBrandProduct($id);
 		$this->data['title'] = $this->IndexModel->getBrandTitle($id);
 		$this->config->config['pageTitle'] = $this->data['title'];
 		$this->load->view('pages/template/header', $this->data);
@@ -320,7 +418,41 @@ class IndexController extends CI_Controller
 		if (isset($_GET['keyword']) && $_GET['keyword'] != '') {
 			$keyword = $_GET['keyword'];
 		}
-		$this->data['product'] = $this->IndexModel->getProductyKeyword($keyword);
+
+		//custom config link
+		$config = array();
+		$config["base_url"] = base_url() . '/tim-kiem';
+		$config['reuse_query_string'] = TRUE; // tai su dung duong dan , chi thay doi trang index
+		$config['total_rows'] = ceil($this->IndexModel->countAllProductByKeyword($keyword)); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
+		$config["per_page"] = 3; //từng trang 3 sản phẩn
+		$config["uri_segment"] = 2; //lấy số trang hiện tại
+		$config['use_page_numbers'] = TRUE; //trang có số
+
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		//end custom config link
+		$this->pagination->initialize($config); //tự động tạo trang
+		$page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 1; //current page active 
+		$offset = ($page - 1) * $config['per_page'];
+		$this->data["links"] = $this->pagination->create_links(); //tự động tạo links phân trang dựa vào trang hiện tại
+		$this->data['allproductbykeyword_pagination'] = $this->IndexModel->getProductByKeyPagination($keyword, $config["per_page"], $offset);
+		// //pagination
+
+		// $this->data['product'] = $this->IndexModel->getProductyKeyword($keyword);
 		$this->data['title'] = $keyword;
 		$this->data['no_product'] = $keyword2;
 		$this->config->config['pageTitle'] = 'Search: ' . $keyword;

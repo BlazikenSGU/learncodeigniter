@@ -19,12 +19,12 @@
 					<tr>
 						<th scope="col">#</th>
 						<th scope="col">Title</th>
-                        <th scope="col">Quantity</th>
+						<th scope="col">Quantity</th>
 						<th scope="col">Price</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Brand</th>
+						<th scope="col">Category</th>
+						<th scope="col">Brand</th>
 						<th scope="col">Slug</th>
-						<th scope="col">Description</th>
+						<!-- <th scope="col">Description</th> -->
 						<th scope="col">Image</th>
 						<th scope="col">Status</th>
 						<th scope="col">Action</th>
@@ -37,12 +37,15 @@
 						<tr>
 							<th scope="row"><?= $key ?></th>
 							<td><?= $prod->title ?></td>
-                            <td><?= $prod->quantity ?></td>
-							<td><?= number_format($prod->price, 0,',','.') ?> vnd</td>
-                            <td><?= $prod->tendanhmuc ?></td>
-                            <td><?= $prod->tenthuonghieu ?></td>
+							<td><?= $prod->quantity ?></td>
+							<td><?= number_format($prod->price, 0, ',', '.') ?> vnd</td>
+							<td><?= $prod->tendanhmuc ?></td>
+							<td><?= $prod->tenthuonghieu ?></td>
 							<td><?= $prod->slug ?></td>
-							<td><?= $prod->description ?></td>
+							<!-- <td>
+								
+									<?= $prod->description ?>
+							</td> -->
 							<td>
 								<img style="max-width: 150px; max-height: 150px" src="<?php echo base_url('uploads/product/' . $prod->image) ?>" alt="">
 							</td>
