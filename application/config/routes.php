@@ -31,6 +31,7 @@ $route['thuong-hieu/(:any)/(:any)/(:any)']['GET'] = 'IndexController/brand/$1/$2
 $route['tim-kiem/(:any)']['GET'] = 'IndexController/tim_kiem/$1';
 //email
 $route['test-mail'] = 'IndexController/send_mail';
+$route['xac-thuc-dang-ky']['GET'] = 'IndexController/xac_thuc_dang_ky';
 
 //ADMIN
 //login

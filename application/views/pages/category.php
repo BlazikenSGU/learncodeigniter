@@ -8,6 +8,27 @@
 					<!--features_items-->
 					<h2 class="title text-center"><?= $title ?></h2>
 
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="exampleFormControlSelect1">Kiểu Lọc</label>
+
+								<select class="form-control select-filter" id="select-filter">
+									<option value="0">-- Loc theo --</option>
+									<option value="?kytu=asc">Ky tu A-Z</option>
+									<option value="?kytu=desc">Ky tu Z-A</option>
+									<option value="?gia=asc">Gia tang dan</option>
+									<option value="?gia=desc">Gia giam dan</option>
+
+								</select>
+							</div>
+						</div>
+
+						<!-- <div class="col-md-7">
+
+						</div> -->
+					</div>
+
 					<?php foreach ($allproductbycate_pagination as $key => $pro) { ?>
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
@@ -44,3 +65,4 @@
 		</div>
 	</div>
 </section>
+

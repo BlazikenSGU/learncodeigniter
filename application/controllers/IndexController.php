@@ -1,4 +1,7 @@
 <?php
+
+use Carbon\Carbon;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 
@@ -15,8 +18,8 @@ class IndexController extends CI_Controller
 		$this->data['category'] = $this->IndexModel->getCategoryHome();
 		$this->data['brand'] = $this->IndexModel->getBrandHome();
 	}
-
-	public function send_mail()
+	//$to_email, $title, $message
+	public function send_mail($to_email, $title, $message)
 	{
 		$config = array();
 		$config['protocol'] = 'smtp';
@@ -29,22 +32,21 @@ class IndexController extends CI_Controller
 		$this->email->set_newline("\r\n");
 
 		//config_mail
-		$this->email->from('truongnhat.nguyen.41@gmail.com', 'Shop Shoe Futsal');
-		$this->email->to('truongnhat.nguyen.41@gmail.com');
+		$this->email->from('truongnhat.nguyen.41@gmail.com', 'Facebook');
+		$this->email->to($to_email);
 		// $this->email->cc('another@another-example.com'); // gui 1 ban copy cho 1 hoac nhieu nguoi
 		// $this->email->bcc('them@their-example.com'); // gui 1 ban copy cho 1 hoac nhieu nguoi && se k thay info ng gui hay nguoi nhan
 
-		$this->email->subject('Email test'); // tieu de
-		$this->email->message('Testing the email class'); //noi dung
+		$this->email->subject($title); // tieu de
+		$this->email->message($message); //noi dung
 
 		//send mail
 		$this->email->send();
 	}
 
-
-
 	public function index()
 	{
+		// echo Carbon::now();
 		//custom config link
 		$config = array();
 		$config["base_url"] = base_url() . '/pagination';
@@ -121,8 +123,24 @@ class IndexController extends CI_Controller
 		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 1; //current page active 
 		$offset = ($page - 1) * $config['per_page'];
 		$this->data["links"] = $this->pagination->create_links(); //tự động tạo links phân trang dựa vào trang hiện tại
-		$this->data['allproductbycate_pagination'] = $this->IndexModel->getCatePagination($id, $config["per_page"], $offset);
+		// $this->data['allproductbycate_pagination'] = $this->IndexModel->getCatePagination($id, $config["per_page"], $offset);
 		// //pagination
+
+		//filter
+		if (isset($_GET['kytu'])) {
+			$kytu = $_GET['kytu'];
+			$this->data['allproductbycate_pagination'] = $this->IndexModel->getCateKytuPagination($id, $kytu, $config["per_page"], $offset);
+		} elseif (isset($_GET['gia'])) {
+			$gia = $_GET['gia'];
+			$this->data['allproductbycate_pagination'] = $this->IndexModel->getCatePricePagination($id, $gia, $config["per_page"], $offset);
+		} elseif (isset($_GET['to']) && $_GET['from']) {
+			$from_price = $_GET['from'];
+			$to_price = $_GET['to'];
+
+			$this->data['allproductbycate_pagination'] = $this->IndexModel->getCatePriceRangePagination($id, $from_price, $to_price, $config["per_page"], $offset);
+		} else {
+			$this->data['allproductbycate_pagination'] = $this->IndexModel->getCatePagination($id, $config["per_page"], $offset);
+		}
 
 		// $this->data['category_product'] = $this->IndexModel->getCategoryProduct($id);
 		$this->data['title'] = $this->IndexModel->getCategoryTitle($id);
@@ -307,6 +325,14 @@ class IndexController extends CI_Controller
 
 				$this->session->set_flashdata('success', 'DONE !');
 				$this->cart->destroy();
+				//gui mail xac nhan dat hang
+				$to_email = $email;
+				$title = 'Đơn hàng đặt tại website ...';
+				$message = 'Vui lòng thanh toán dư nợ 2.350.000vnd cho chúng tôi';
+
+				//call function send_mail
+				$this->send_mail($to_email, $title, $message);
+
 				redirect(base_url('/thanks'));
 			} else {
 				$this->session->set_flashdata('error', 'PAYMENT FAILLL');
@@ -340,6 +366,7 @@ class IndexController extends CI_Controller
 		if ($this->form_validation->run()) {
 			$email = $this->input->post('email');
 			$password = md5($this->input->post('password'));
+
 			$this->load->model('LoginModel');
 			$result = $this->LoginModel->checkLoginCustomer($email, $password);
 
@@ -353,7 +380,7 @@ class IndexController extends CI_Controller
 				$this->session->set_flashdata('success', 'LOGIN SUCCESS');
 				redirect(base_url('/checkout'));
 			} else {
-				$this->session->set_flashdata('error', 'WRONG EMAIL OR PASSWORD');
+				$this->session->set_flashdata('error', 'Kiem tra xac thuc tai khoan Hoac mat khau.');
 				redirect(base_url('/dang-nhap'));
 			}
 		} else {
@@ -375,6 +402,8 @@ class IndexController extends CI_Controller
 			$name = $this->input->post('name');
 			$phone = $this->input->post('phone');
 			$address = $this->input->post('address');
+			$token = rand(0000, 9999);
+			$date_create = Carbon::now('Asia/Ho_Chi_Minh');
 
 			$data = array(
 				'email' => $email,
@@ -382,6 +411,8 @@ class IndexController extends CI_Controller
 				'password' => $password,
 				'phone' => $phone,
 				'address' => $address,
+				'token' => $token,
+				'date_create' => $date_create
 			);
 
 
@@ -389,13 +420,21 @@ class IndexController extends CI_Controller
 			$result = $this->LoginModel->newCustomer($data);
 
 			if ($result) {
-				$session_array = [
-					'username' => $name,
-					'email' => $email,
-				];
-				$this->session->set_userdata('LoggedInCustomer', $session_array);
-				$this->session->set_flashdata('success', 'LOGIN SUCCESS');
-				redirect(base_url('/checkout'));
+				// $session_array = [
+				// 	'username' => $name,
+				// 	'email' => $email,
+				// ];
+				// $this->session->set_userdata('LoggedInCustomer', $session_array);
+				// $this->session->set_flashdata('success', 'LOGIN SUCCESS');
+
+				//send mail
+				$fullurl = base_url() . 'xac-thuc-dang-ky/?token=' . $token . '&email=' . $email;
+				$title = 'Dang ky tai khoan thanh cong.';
+				$message = 'Click vao duong link de kich hoat tai khoan: ' . $fullurl;
+				$to_email = $email;
+				$this->send_mail($to_email, $title, $message);
+				$this->session->set_flashdata('success', 'Kiem tra email de xac thuc kich hoat tai khoan.');
+				redirect(base_url('/dang-nhap'));
 			} else {
 				$this->session->set_flashdata('error', 'WRONG EMAIL OR PASSWORD');
 				redirect(base_url('/dang-nhap'));
@@ -459,5 +498,38 @@ class IndexController extends CI_Controller
 		$this->load->view('pages/template/header', $this->data);
 		$this->load->view('pages/search', $this->data);
 		$this->load->view('pages/template/footer');
+	}
+
+	public function xac_thuc_dang_ky()
+	{
+		if (isset($_GET['email']) && $_GET['token']) {
+			$email = $_GET['email'];
+			$token = $_GET['token'];
+		}
+
+		$data['get_customer'] = $this->IndexModel->getCustomerToken($email);
+
+		$now  = Carbon::now('Asia/Ho_Chi_Minh')->addMinutes(5);
+		$token2 = rand(0000, 9999);
+
+		foreach ($data['get_customer'] as $key => $val) {
+			if ($token != $val->token) {
+				$this->session->set_flashdata('error', 'Link kich hoat chi su dung mot lan duy nhat.');
+				redirect(base_url('/dang-nhap'));
+			}
+			$data_customer = [
+				'status'  => 1,
+				'token' => $token2
+			];
+
+			if ($val->date_create < $now) {
+				$active_customer  = $this->IndexModel->activeCustomersToken($email, $data_customer);
+				$this->session->set_flashdata('success', 'Kich hoat tai khoan thanh cong');
+				redirect(base_url('/dang-nhap'));
+			} else {
+				$this->session->set_flashdata('error', 'Kich hoat that bai');
+				redirect(base_url('/dang-nhap'));
+			}
+		}
 	}
 }

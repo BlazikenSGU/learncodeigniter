@@ -188,4 +188,44 @@ class IndexModel extends CI_Model
 			->get();
 		return $query->result();
 	}
+
+	public function getCustomerToken($email)
+	{
+		$query = $this->db->get_where('customers', ['email' => $email]);
+
+		return $query->result();
+	}
+
+	public function activeCustomersToken($email, $data_customer)
+	{
+		return $this->db->update('customers', $data_customer, ['email' => $email]);
+	}
+
+
+	//filter
+	public function getCateKytuPagination($id, $kytu, $limit, $start)
+	{
+		$this->db->limit($limit, $start);
+		$query =  $this->db->select('categories.title as tendanhmuc, products.*, brands.title as tenthuonghieu')
+			->from('categories')
+			->join('products', 'products.category_id=categories.id')
+			->join('brands', 'brands.id = products.brand_id')
+			->where('products.category_id', $id)
+			->order_by('products.title', $kytu)
+			->get();
+		return $query->result();
+	}
+
+	public function getCatePricePagination($id, $gia, $limit, $start)
+	{
+		$this->db->limit($limit, $start);
+		$query =  $this->db->select('categories.title as tendanhmuc, products.*, brands.title as tenthuonghieu')
+			->from('categories')
+			->join('products', 'products.category_id=categories.id')
+			->join('brands', 'brands.id = products.brand_id')
+			->where('products.category_id', $id)
+			->order_by('products.price', $gia)
+			->get();
+		return $query->result();
+	}
 }
