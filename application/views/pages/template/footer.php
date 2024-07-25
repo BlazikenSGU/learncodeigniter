@@ -184,11 +184,47 @@
 	})
 </script>
 
+
+<!-- loc gia theo khoang -->
+<script>
+	$('.price_to').val(<?= $max_price ?>)
+	$('.price_from').val(<?= $min_price ?>)
+	$(function() {
+		$("#slider-range").slider({
+			range: true,
+			min: <?= $min_price ?>,
+			max: <?= $max_price ?>,
+			values: [<?= $min_price ?>, <?= $max_price ?>],
+			slide: function(event, ui) {
+				$("#amount").val(addPlus(ui.values[0]) + "đ - " + addPlus(ui.values[1]) + "đ");
+				$('.price_from').val(ui.values[0]);
+				$('.price_to').val(ui.values[1]);
+			}
+			
+		});
+		$("#amount").val(addPlus($("#slider-range").slider("values", 0)) +
+			"đ - " + addPlus($("#slider-range").slider("values", 1)) + "đ");
+	});
+
+	function addPlus(nStr) {
+		nStr += '';
+		x = nStr.split('.');
+		x1 = x[0];
+		x2 = x.length > 1 ? '.' + x[1] : '';
+		var rgx = /(\d+)(\d{3})/;
+		while (rgx.test(x1)) {
+			x1 = x1.replace(rgx, '$1' + '.' + '$2');
+		}
+		return x1 + x2;
+	}
+</script>
+
 <script src="<?= base_url('frontend/js/bootstrap.min.js') ?>"></script>
 <script src="<?= base_url('frontend/js/jquery.scrollUp.min.js') ?>"></script>
 <script src="<?= base_url('frontend/js/price-range.js') ?>"></script>
 <script src="<?= base_url('frontend/js/jquery.prettyPhoto.js') ?>"></script>
 <script src="<?= base_url('frontend/js/main.js') ?>"></script>
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 </body>
 
 </html>

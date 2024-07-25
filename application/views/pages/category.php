@@ -27,6 +27,20 @@
 						<!-- <div class="col-md-7">
 
 						</div> -->
+						<div class="col-md-7">
+							<form method="GET">
+							<p>
+								<label for="amount">Khoảng giá:</label>
+								<input type="text" id="amount" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+							</p>
+
+							<div id="slider-range"></div>
+							<input type="hidden" class="price_from" name="from">
+							<input type="hidden" class="price_to" name="to">
+							<input type="submit" value="Loc gia" class="btn btn-primary filter-price">
+							</form>
+						</div>
+						
 					</div>
 
 					<?php foreach ($allproductbycate_pagination as $key => $pro) { ?>
@@ -65,4 +79,3 @@
 		</div>
 	</div>
 </section>
-

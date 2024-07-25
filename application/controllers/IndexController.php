@@ -80,7 +80,6 @@ class IndexController extends CI_Controller
 		$this->data['allproduct_pagination'] = $this->IndexModel->getIndexPagination($config["per_page"], $offset); // lay san pham
 		// //pagination
 
-
 		$this->config->config['pageTitle'] = 'Shop TF Futsal';
 		// $this->data['allproduct'] = $this->IndexModel->getAllProduct();
 		$this->load->view('pages/template/header', $this->data);
@@ -125,6 +124,10 @@ class IndexController extends CI_Controller
 		$this->data["links"] = $this->pagination->create_links(); //tự động tạo links phân trang dựa vào trang hiện tại
 		// $this->data['allproductbycate_pagination'] = $this->IndexModel->getCatePagination($id, $config["per_page"], $offset);
 		// //pagination
+
+		//get min max price
+		$this->data['min_price'] = $this->IndexModel->getMinProductPrice($id);
+		$this->data['max_price'] = $this->IndexModel->getMaxProductPrice($id);
 
 		//filter
 		if (isset($_GET['kytu'])) {

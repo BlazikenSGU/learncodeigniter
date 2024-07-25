@@ -14,6 +14,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link href="<?= base_url('frontend/css/bootstrap.min.css') ?>" rel="stylesheet">
 	<!-- <link href="frontend/css/font-awesome.min.css" rel="stylesheet"> -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
 	<link href="<?= base_url('frontend/css/prettyPhoto.css') ?>" rel="stylesheet">
 	<link href="<?= base_url('frontend/css/price-range.css') ?>" rel="stylesheet">
 	<link href="<?= base_url('frontend/css/animate.css') ?>" rel="stylesheet">
