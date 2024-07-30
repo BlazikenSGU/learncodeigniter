@@ -267,4 +267,10 @@ class IndexModel extends CI_Model
 			->get();
 		return $query->result();
 	}
+
+	public function getSliderHome()
+	{
+		$query =  $this->db->get_where('sliders', ['status' => 1]);
+		return $query->result();
+	}
 }

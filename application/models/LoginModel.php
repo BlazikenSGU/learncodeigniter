@@ -33,4 +33,9 @@ class LoginModel extends CI_Model
 	{
 		return $this->db->insert('order_details', $data_order_details);
 	}
+
+	public function registerAdmin($data)
+	{
+		return  $this->db->insert('users', $data);
+	}
 }

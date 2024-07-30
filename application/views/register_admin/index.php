@@ -1,6 +1,6 @@
 <div class="container">
 
-	<h1>Đăng nhập Admin</h1>
+	<h1>Register Admin</h1>
 
 	<?php
 	if ($this->session->flashdata('success')) {
@@ -14,11 +14,17 @@
 	}
 	?>
 
-	<form action="<?php echo base_url('login-user') ?>" method="POST">
+	<form action="<?php echo base_url('register-insert') ?>" method="POST">
 
 		<div class="form-group">
-			<label for="exampleInputEmail1">Email address</label>
-			<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+			<label for="exampleInputEmail1">Username</label>
+			<input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
+			<?php echo '<span class="text text-danger">' . form_error('username') . '</span>'; ?>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleInputEmail1">Email</label>
+			<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
 			<?php echo '<span class="text text-danger">' . form_error('email') . '</span>'; ?>
 		</div>
 
@@ -28,7 +34,9 @@
 			<?php echo '<span class="text text-danger">' . form_error('password') . '</span>'; ?>
 		</div>
 
-		<button type="submit" class="btn btn-primary">Login</button>
-		<a href="<?php echo base_url('register-admin') ?>" class="btn btn-success">Register Admin</a>
+
+		<a href="<?php echo base_url('login') ?>" class="btn btn-default">Back Login Admin</a>
+		<button type="submit" class="btn btn-primary">Register admin </button>
+
 	</form>
 </div>

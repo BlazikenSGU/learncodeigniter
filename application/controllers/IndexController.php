@@ -12,10 +12,12 @@ class IndexController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('IndexModel');
+		// $this->load->model('SliderModel');
 		$this->load->library('cart');
 		$this->load->library('pagination');
 		$this->load->library('email');
 		$this->data['category'] = $this->IndexModel->getCategoryHome();
+		$this->data['slider'] = $this->IndexModel->getSliderHome();
 		$this->data['brand'] = $this->IndexModel->getBrandHome();
 	}
 	//$to_email, $title, $message
@@ -534,5 +536,13 @@ class IndexController extends CI_Controller
 				redirect(base_url('/dang-nhap'));
 			}
 		}
+	}
+
+	public function notfound()
+	{
+		$this->load->view('pages/template/header', $this->data);
+		
+		$this->load->view('pages/404');
+		$this->load->view('pages/template/footer');
 	}
 }

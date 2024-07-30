@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 $route['default_controller'] = 'IndexController';
-$route['404_override'] = '';
+$route['404_override'] = 'IndexController/notfound';
 $route['translate_uri_dashes'] = FALSE;
 
 //home Index
@@ -37,6 +37,8 @@ $route['xac-thuc-dang-ky']['GET'] = 'IndexController/xac_thuc_dang_ky';
 //login
 $route['login']['GET'] = 'LoginController/index';
 $route['login-user']['POST'] = 'LoginController/login';
+$route['register-admin']['GET'] = 'LoginController/register_admin';
+$route['register-insert']['POST'] = 'LoginController/register_insert';
 
 //dashboard
 $route['dashboard']['GET'] = 'DashboardController/index';
@@ -71,3 +73,11 @@ $route['order/list']['GET'] = 'OrderController/index';
 $route['order/view/(:any)']['GET'] = 'OrderController/view/$1';
 $route['order/delete/(:any)']['GET'] = 'OrderController/delete_order/$1';
 $route['order/process']['POST'] = 'OrderController/process';
+
+//slider
+$route['slider/create']['GET'] = 'SliderController/create';
+$route['slider/list']['GET'] = 'SliderController/index';
+$route['slider/store']['POST'] = 'SliderController/store';
+$route['slider/edit/(:any)']['GET'] = 'SliderController/edit/$1';
+$route['slider/update/(:any)']['POST'] = 'SliderController/update/$1';
+$route['slider/delete/(:any)']['GET'] = 'SliderController/delete/$1';
