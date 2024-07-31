@@ -44,6 +44,17 @@
 
 						<form action="<?= base_url('add-to-cart') ?>" method="POST">
 							<div class="col-sm-7">
+								<?php
+								if ($this->session->flashdata('success')) {
+								?>
+									<div class="alert alert-success"><?php echo $this->session->flashdata('success') ?></div>
+								<?php
+								} elseif ($this->session->flashdata('error')) {
+								?>
+									<div class="alert alert-danger"><?php echo $this->session->flashdata('error') ?></div>
+								<?php
+								}
+								?>
 								<div class="product-information">
 
 									<img src="images/product-details/new.jpg" class="newarrival" alt="" />

@@ -224,18 +224,32 @@ class IndexController extends CI_Controller
 		$quantity = $this->input->post('quantity');
 		$this->data['product_details'] = $this->IndexModel->getProductDetails($product_id);
 
-		//dat hang
-		foreach ($this->data['product_details'] as $key => $pro) {
-			$cart = array(
-				'id' => $pro->id,
-				'qty' => $quantity,
-				'price' => $pro->price,
-				'name' => $pro->title,
-				'options' => array('image' => $pro->image),
-			);
+		if ($this->cart->contents() > 0) {
+			foreach ($this->cart->contents() as $items) {
+				if ($items['id'] == $product_id) {
+					$this->session->set_flashdata('success', 'Da co san trong gio hang!');
+					redirect(base_url() . 'gio-hang', 'refresh');
+				} else {
+					foreach ($this->data['product_details'] as $key => $pro) {
+						if ($pro->quantity >= $quantity) {
+							$cart = array(
+								'id' => $pro->id,
+								'qty' => $quantity,
+								'price' => $pro->price,
+								'name' => $pro->title,
+								'options' => array('image' => $pro->image, 'stock' => $pro->quantity),
+							);
+						} else {
+							$this->session->set_flashdata('error', 'Khong du so luong san pham de ban!');
+							redirect($_SERVER['HTTP_REFERER']);
+						}
+					}
+				}
+			}
+			$this->session->set_flashdata('success', 'Them vao gio hang thanh cong!');
+			$this->cart->insert($cart);
+			redirect(base_url() . 'gio-hang', 'refresh');
 		}
-		$this->cart->insert($cart);
-		redirect(base_url() . 'gio-hang', 'refresh');
 	}
 
 	public function delete_all_cart()
@@ -256,10 +270,17 @@ class IndexController extends CI_Controller
 
 		foreach ($this->cart->contents() as $items) {
 			if ($rowid == $items['rowid']) {
-				$cart = array(
-					'rowid' => $rowid,
-					'qty' => $quantity,
-				);
+				if ($quantity < $items['options']['stock']) {
+					$cart = array(
+						'rowid' => $rowid,
+						'qty' => $quantity,
+					);
+				} else {
+					$cart = array(
+						'rowid' => $rowid,
+						'qty' => $items['options']['stock'],
+					);
+				}
 			}
 		}
 		$this->cart->update($cart);
@@ -541,7 +562,6 @@ class IndexController extends CI_Controller
 	public function notfound()
 	{
 		$this->load->view('pages/template/header', $this->data);
-		
 		$this->load->view('pages/404');
 		$this->load->view('pages/template/footer');
 	}
