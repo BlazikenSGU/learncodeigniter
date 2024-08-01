@@ -53,7 +53,7 @@ class IndexController extends CI_Controller
 		$config = array();
 		$config["base_url"] = base_url() . '/pagination';
 		$config['total_rows'] = ceil($this->IndexModel->countAllProduct()); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
-		$config["per_page"] = 3; //từng trang 3 sản phẩn
+		$config["per_page"] = 6; //từng trang 3 sản phẩn
 		$config["uri_segment"] = 2; //lấy số trang hiện tại
 		$config['use_page_numbers'] = TRUE; //trang có số
 
@@ -84,6 +84,11 @@ class IndexController extends CI_Controller
 
 		$this->config->config['pageTitle'] = 'Shop TF Futsal';
 		// $this->data['allproduct'] = $this->IndexModel->getAllProduct();
+
+
+		//show san pham theo danh muc
+		$this->data['item_categories'] = $this->IndexModel->ItemCategories();
+
 		$this->load->view('pages/template/header', $this->data);
 		$this->load->view('pages/template/slider');
 
@@ -564,5 +569,33 @@ class IndexController extends CI_Controller
 		$this->load->view('pages/template/header', $this->data);
 		$this->load->view('pages/404');
 		$this->load->view('pages/template/footer');
+	}
+
+	public function contact()
+	{
+		$this->config->config['pageTitle'] = 'Contact';
+		$this->load->view('pages/template/header', $this->data);
+		$this->load->view('pages/contact');
+		$this->load->view('pages/template/footer');
+	}
+
+	public function send_contact()
+	{
+		$data = [
+			'email' => $this->input->post('email'),
+			'name' => $this->input->post('name'),
+			'phone' => $this->input->post('phone'),
+			'note' => $this->input->post('note'),
+		];
+		$result = $this->IndexModel->insertContact($data);
+		if ($result) {
+			$title = 'Gui yeu cau lien he thanh cong cua: ' . $this->input->post('name');
+			$message = 'Noi dung yeu cau: ' . $this->input->post('note');
+			$to_email = $this->input->post('email');
+			$this->send_mail($to_email, $title, $message);
+		}
+
+		$this->session->set_flashdata('success', 'Gui yeu cau lien he thanh cong');
+		redirect(base_url('contact'));
 	}
 }

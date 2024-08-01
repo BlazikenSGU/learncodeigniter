@@ -29,6 +29,7 @@ $route['pagination'] = 'IndexController';
 $route['danh-muc/(:any)/(:any)/(:any)']['GET'] = 'IndexController/category/$1/$2/$3';
 $route['thuong-hieu/(:any)/(:any)/(:any)']['GET'] = 'IndexController/brand/$1/$2/$3';
 $route['tim-kiem/(:any)']['GET'] = 'IndexController/tim_kiem/$1';
+
 //email
 $route['test-mail'] = 'IndexController/send_mail';
 $route['xac-thuc-dang-ky']['GET'] = 'IndexController/xac_thuc_dang_ky';
@@ -70,6 +71,7 @@ $route['product/delete/(:any)']['GET'] = 'ProductController/delete/$1';
 
 //order
 $route['order/list']['GET'] = 'OrderController/index';
+$route['order/print_order/(:any)']['GET'] = 'OrderController/print_order/$1';
 $route['order/view/(:any)']['GET'] = 'OrderController/view/$1';
 $route['order/delete/(:any)']['GET'] = 'OrderController/delete_order/$1';
 $route['order/process']['POST'] = 'OrderController/process';
@@ -81,3 +83,7 @@ $route['slider/store']['POST'] = 'SliderController/store';
 $route['slider/edit/(:any)']['GET'] = 'SliderController/edit/$1';
 $route['slider/update/(:any)']['POST'] = 'SliderController/update/$1';
 $route['slider/delete/(:any)']['GET'] = 'SliderController/delete/$1';
+
+//contact
+$route['contact']['GET'] = 'IndexController/contact';
+$route['send_contact']['POST'] = 'IndexController/send_contact';

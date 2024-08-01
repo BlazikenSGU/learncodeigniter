@@ -273,4 +273,25 @@ class IndexModel extends CI_Model
 		$query =  $this->db->get_where('sliders', ['status' => 1]);
 		return $query->result();
 	}
+
+	public function insertContact($data)
+	{
+		return $this->db->insert('contacts', $data);
+	}
+
+
+	public function ItemCategories()
+	{
+		$this->db->select('products.*, categories.title as  titlecate, categories.id');
+		$this->db->from('categories');
+		$this->db->join('products', 'products.category_id = categories.id');
+		$query = $this->db->get();
+		$result = $query->result_array();
+
+		$newArray = array();
+		foreach($result as $key => $value){
+			$newArray[$value['titlecate']][] = $value;
+		}
+		return $newArray;
+	}
 }

@@ -118,7 +118,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 										<?php
 										foreach ($category as $key => $cate) {
 										?>
-											<li><a href="<?= base_url('danh-muc/' . $cate->id) ?>"><?= $cate->title ?></a></li>
+											<li><a href="<?= base_url('danh-muc/' . $cate->id.'/'.$cate->slug) ?>"><?= $cate->title ?></a></li>
 										<?php } ?>
 									</ul>
 								</li>
@@ -129,7 +129,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									</ul>
 								</li>
 								
-								<li><a href="contact-us.html">Contact</a></li>
+								<li><a href="<?= base_url('contact')?>">Contact</a></li>
 							</ul>
 						</div>
 					</div>
