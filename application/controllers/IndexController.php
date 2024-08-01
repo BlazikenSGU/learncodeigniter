@@ -208,8 +208,14 @@ class IndexController extends CI_Controller
 	{
 
 		$this->data['product_details'] = $this->IndexModel->getProductDetails($id);
+		foreach ($this->data['product_details'] as $key => $val) {
+			$category_id = $val->category_id;
+		}
+		$this->data['product_related'] = $this->IndexModel->getProductRelated($id, $category_id);
+
 		$this->data['title'] = $this->IndexModel->getProductTitle($id);
 		$this->config->config['pageTitle'] = $this->data['title'];
+
 		$this->load->view('pages/template/header', $this->data);
 		$this->load->view('pages/product_details', $this->data);
 		$this->load->view('pages/template/footer');
