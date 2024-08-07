@@ -62,6 +62,16 @@
 
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+						Blog
+					</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="<?php echo base_url('blog/create'); ?>">Create</a>
+						<a class="dropdown-item" href="<?php echo base_url('blog/list'); ?>">List</a>
+					</div>
+				</li>
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
 						<?php echo $this->session->userdata('LoggedIn')['username'] ?>
 					</a>
 					<div class="dropdown-menu">

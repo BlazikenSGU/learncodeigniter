@@ -53,6 +53,15 @@ $route['brand/edit/(:any)']['GET'] = 'BrandController/edit/$1';
 $route['brand/update/(:any)']['POST'] = 'BrandController/update/$1';
 $route['brand/delete/(:any)']['GET'] = 'BrandController/delete/$1';
 
+//blog
+$route['blog/create']['GET'] = 'BlogController/create';
+$route['blog/list']['GET'] = 'BlogController/index';
+$route['blog/store']['POST'] = 'BlogController/store';
+$route['blog/edit/(:any)']['GET'] = 'BlogController/edit/$1';
+$route['blog/update/(:any)']['POST'] = 'BlogController/update/$1';
+$route['blog/delete/(:any)']['GET'] = 'BlogController/delete/$1';
+$route['danh-muc-blog/(:any)/(:any)']['GET'] = 'IndexController/blog/$1/$2';
+
 //Category
 $route['category/create']['GET'] = 'CategoryController/create';
 $route['category/list']['GET'] = 'CategoryController/index';
@@ -87,3 +96,6 @@ $route['slider/delete/(:any)']['GET'] = 'SliderController/delete/$1';
 //contact
 $route['contact']['GET'] = 'IndexController/contact';
 $route['send_contact']['POST'] = 'IndexController/send_contact';
+
+//comment
+$route['comment/send']['POST'] = 'IndexController/comment_send';

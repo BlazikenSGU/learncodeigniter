@@ -17,6 +17,7 @@ class IndexController extends CI_Controller
 		$this->load->library('pagination');
 		$this->load->library('email');
 		$this->data['category'] = $this->IndexModel->getCategoryHome();
+		$this->data['blog'] = $this->IndexModel->getBlogHome();
 		$this->data['slider'] = $this->IndexModel->getSliderHome();
 		$this->data['brand'] = $this->IndexModel->getBrandHome();
 	}
@@ -93,6 +94,51 @@ class IndexController extends CI_Controller
 		$this->load->view('pages/template/slider');
 
 		$this->load->view('pages/home', $this->data);
+		$this->load->view('pages/template/footer');
+	}
+
+	public function blog($id)
+	{
+
+		$this->data['slug'] = $this->IndexModel->getBlogSlug($id);
+		//custom config link
+		$config = array();
+		$config["base_url"] = base_url() . '/danh-muc-blog' . '/' . $id . '/' . $this->data['slug'];
+		$config['total_rows'] = ceil($this->IndexModel->countAllProductByCate($id)); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
+		$config["per_page"] = 3; //từng trang 3 sản phẩn
+		$config["uri_segment"] = 4; //lấy số trang hiện tại
+		$config['use_page_numbers'] = TRUE; //trang có số
+
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		//end custom config link
+		$this->pagination->initialize($config); //tự động tạo trang
+		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 1; //current page active 
+		$offset = ($page - 1) * $config['per_page'];
+		$this->data["links"] = $this->pagination->create_links(); //tự động tạo links phân trang dựa vào trang hiện tại
+		// $this->data['allproductbycate_pagination'] = $this->IndexModel->getCatePagination($id, $config["per_page"], $offset);
+		// //pagination
+
+
+		// $this->data['category_product'] = $this->IndexModel->getCategoryProduct($id);
+		$this->data['title'] = $this->IndexModel->getCategoryTitle($id);
+		$this->config->config['pageTitle'] = $this->data['title'];
+		$this->load->view('pages/template/header', $this->data);
+		$this->load->view('pages/category', $this->data);
 		$this->load->view('pages/template/footer');
 	}
 
@@ -208,6 +254,8 @@ class IndexController extends CI_Controller
 	{
 
 		$this->data['product_details'] = $this->IndexModel->getProductDetails($id);
+		$this->data['list_comments'] = $this->IndexModel->getListComment($id);
+
 		foreach ($this->data['product_details'] as $key => $val) {
 			$category_id = $val->category_id;
 		}
@@ -603,5 +651,26 @@ class IndexController extends CI_Controller
 
 		$this->session->set_flashdata('success', 'Gui yeu cau lien he thanh cong');
 		redirect(base_url('contact'));
+	}
+
+	public function comment_send()
+	{
+		$data = array(
+			'product_id' => $this->input->post('product_id'),
+			'name' => $this->input->post('name_comment'),
+			'email' => $this->input->post('email_comment'),
+			'comment' => $this->input->post('comment'),
+			'stars' => $this->input->post('star'),
+			'status' => 0,
+			'dated' => Carbon::now('Asia/Ho_Chi_Minh')
+		);
+
+		$result = $this->IndexModel->insertComment($data);
+
+		if ($result) {
+			echo 'success';
+		} else {
+			echo 'failed';
+		}
 	}
 }

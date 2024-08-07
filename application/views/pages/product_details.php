@@ -1,4 +1,101 @@
 <section>
+	<style>
+		.counterW {
+			margin: 0 0 0 60px;
+		}
+
+		.ratingW {
+			position: relative;
+			margin: 10px 0 0;
+		}
+
+		.ratingW li {
+			display: inline-block;
+			margin: 0px;
+		}
+
+		.ratingW li a {
+			display: block;
+			position: relative;
+			/*margin:0 3px;  width:28px; height:27px;color:#ccc; background:url('../img/ico/icoStarOff.png') no-repeat; background-size:100%;*/
+		}
+
+		/*.ratingW li.on a {background:url('../img/ico/icoStarOn.png') no-repeat; background-size:100%;}*/
+
+		.star {
+			position: relative;
+			display: inline-block;
+			width: 0;
+			height: 0;
+			margin-left: .9em;
+			margin-right: .9em;
+			margin-bottom: 1.2em;
+			border-right: .3em solid transparent;
+			border-bottom: .7em solid #ddd;
+			border-left: .3em solid transparent;
+			/* Controlls the size of the stars. */
+			font-size: 24px;
+		}
+
+		.star:before,
+		.star:after {
+			content: '';
+			display: block;
+			width: 0;
+			height: 0;
+			position: absolute;
+			top: .6em;
+			left: -1em;
+			border-right: 1em solid transparent;
+			border-bottom: .7em solid #ddd;
+			border-left: 1em solid transparent;
+			-webkit-transform: rotate(-35deg);
+			transform: rotate(-35deg);
+		}
+
+		.star:after {
+			-webkit-transform: rotate(35deg);
+			transform: rotate(35deg);
+		}
+
+
+		.ratingW li.on .star {
+			position: relative;
+			display: inline-block;
+			width: 0;
+			height: 0;
+			margin-left: .9em;
+			margin-right: .9em;
+			margin-bottom: 1.2em;
+			border-right: .3em solid transparent;
+			border-bottom: .7em solid #FC0;
+			border-left: .3em solid transparent;
+			/* Controlls the size of the stars. */
+			font-size: 24px;
+		}
+
+		.ratingW li.on .star:before,
+		.ratingW li.on .star:after {
+			content: '';
+			display: block;
+			width: 0;
+			height: 0;
+			position: absolute;
+			top: .6em;
+			left: -1em;
+			border-right: 1em solid transparent;
+			border-bottom: .7em solid #FC0;
+			border-left: 1em solid transparent;
+			-webkit-transform: rotate(-35deg);
+			transform: rotate(-35deg);
+		}
+
+		.ratingW li.on .star:after {
+			-webkit-transform: rotate(35deg);
+			transform: rotate(35deg);
+		}
+	</style>
+
 	<div class="container">
 		<div class="row">
 			<?php $this->load->view('pages/template/sidebar'); ?>
@@ -251,24 +348,51 @@
 
 						<div class="tab-pane fade active in" id="reviews">
 							<div class="col-sm-12">
-								<ul>
-									<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-									<li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-									<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
-								</ul>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-								<p><b>Write Your Review</b></p>
 
+								<?php foreach ($list_comments as $key => $comment) { ?>
+									<ul>
+										<li><a href="#"><i class="fa fa-user"></i><?= $comment->name ?></a></li>
+										<li><a href="#"><i class="fa fa-clock-o"></i><?= $comment->dated ?></a></li>
+
+									</ul>
+									<p> <?= $comment->comment ?></p>
+								<?php } ?>
+						
+
+								<h6>Rating: </h6>
+								<input type="hidden" class="star_rating_value">
+								<p class="counterW">score: <span class="star_rating">3</span> out of <span>5</span></p>
+								<ul class="ratingW">
+									<li class="on"><a href="javascript:void(0);">
+											<div class="star"></div>
+										</a></li>
+									<li class="on"><a href="javascript:void(0);">
+											<div class="star"></div>
+										</a></li>
+									<li class="on"><a href="javascript:void(0);">
+											<div class="star"></div>
+										</a></li>
+									<li><a href="javascript:void(0);">
+											<div class="star"></div>
+										</a></li>
+									<li><a href="javascript:void(0);">
+											<div class="star"></div>
+										</a></li>
+								</ul>
+								
+								<p><b>Write Your Review</b></p>
 								<form action="#">
 									<span>
-										<input type="text" placeholder="Your Name" />
-										<input type="email" placeholder="Email Address" />
+										<input type="hidden" class="product_id_comment" required value="<?= $pro->id ?>" />
+										<input type="text" class="name_comment" required placeholder="Name" />
+										<input type="email" required class="email_comment" placeholder="Email" />
 									</span>
-									<textarea name=""></textarea>
+									<textarea name="" required class="comment" placeholder="Noi dung danh gia"></textarea>
 									<b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
-									<button type="button" class="btn btn-default pull-right">
-										Submit
+									<button type="button" class="btn btn-default pull-right write-comment">
+										Gui danh gia
 									</button>
+									<p id="comment_alert"></p>
 								</form>
 							</div>
 						</div>
@@ -285,7 +409,7 @@
 						<div class="carousel-inner">
 							<?php foreach ($product_related as $key => $pro) { ?>
 								<div class="item active">
-								<!-- <?= $key === 0 ? 'active' : '' ?> -->
+									<!-- <?= $key === 0 ? 'active' : '' ?> -->
 									<div class="col-sm-4">
 										<div class="product-image-wrapper">
 											<form action="<?= base_url('add-to-cart') ?>" method="POST">
@@ -312,7 +436,7 @@
 
 								</div>
 							<?php } ?>
-							
+
 						</div>
 						<a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
 							<i class="fa fa-angle-left"></i>

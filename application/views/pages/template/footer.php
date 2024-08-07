@@ -200,7 +200,7 @@
 				$('.price_from').val(ui.values[0]);
 				$('.price_to').val(ui.values[1]);
 			}
-			
+
 		});
 		$("#amount").val(addPlus($("#slider-range").slider("values", 0)) +
 			"đ - " + addPlus($("#slider-range").slider("values", 1)) + "đ");
@@ -217,6 +217,72 @@
 		}
 		return x1 + x2;
 	}
+</script>
+
+<!-- comment -->
+<script>
+	$('.write-comment').click(function() {
+		var name_comment = $('.name_comment').val();
+		var email_comment = $('.email_comment').val();
+		var comment = $('.comment').val();
+		var product_id = $('.product_id_comment').val();
+		var star = $('.star_rating_value').val();
+
+		// alert(name_comment,email_comment,comment);
+		// alert(email_comment);
+		// alert(comment);
+
+		if (name_comment == '' || email_comment == '' || comment == '') {
+			alert('Vui long dien day thu thong tin truoc khi gui')
+		} else {
+			$.ajax({
+				method: 'POST',
+				url: '/comment/send',
+				data: {
+					name_comment: name_comment,
+					email_comment: email_comment,
+					comment: comment,
+					product_id: product_id,
+					star: star
+				},
+				success: function() {
+					$('#comment_alert').html('<span class="text text-success">Danh gia da duoc gui</span>');
+					$('.name_comment').val('');
+					$('.email_comment').val('');
+					$('.comment').val(' ')
+				}
+			})
+		}
+	});
+</script>
+
+<!-- rating star -->
+<script>
+	function ratingStar(star) {
+		star.click(function() {
+			var stars = $('.ratingW').find('li')
+			stars.removeClass('on');
+			var thisIndex = $(this).parents('li').index();
+			for (var i = 0; i <= thisIndex; i++) {
+				stars.eq(i).addClass('on');
+			}
+			putScoreNow(thisIndex + 1);
+			$('.star_rating_value').val(i);
+		});
+	}
+
+	function putScoreNow(i) {
+		$('.star_rating').html(i);
+
+	}
+
+
+	$(function() {
+		if ($('.ratingW').length > 0) {
+			ratingStar($('.ratingW li a'));
+			$('.star_rating_value').val(3);
+		}
+	});
 </script>
 
 <script src="<?= base_url('frontend/js/bootstrap.min.js') ?>"></script>

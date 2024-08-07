@@ -182,6 +182,17 @@ class IndexModel extends CI_Model
 		return $title = $result->slug;
 	}
 
+	public function getBlogSlug($id)
+	{
+		$this->db->select('blogs.*');
+		$this->db->from('blogs');
+		$this->db->limit(1);
+		$this->db->where('blogs.id', $id);
+		$query = $this->db->get();
+		$result = $query->row();
+		return $title = $result->slug;
+	}
+
 	public function countAllProductByKeyword($keyword)
 	{
 		$this->db->like('products.title', $keyword);
@@ -286,9 +297,20 @@ class IndexModel extends CI_Model
 		return $query->result();
 	}
 
+	public function getBlogHome()
+	{
+		$query =  $this->db->get_where('blogs', ['status' => 1]);
+		return $query->result();
+	}
+
 	public function insertContact($data)
 	{
 		return $this->db->insert('contacts', $data);
+	}
+
+	public function insertComment($data)
+	{
+		return $this->db->insert('comments', $data);
 	}
 
 
@@ -305,5 +327,11 @@ class IndexModel extends CI_Model
 			$newArray[$value['titlecate']][] = $value;
 		}
 		return $newArray;
+	}
+
+	public function getListComment()
+	{
+		$query =  $this->db->get_where('comments', ['status' => 1]);
+		return $query->result();
 	}
 }

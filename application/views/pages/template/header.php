@@ -118,18 +118,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 										<?php
 										foreach ($category as $key => $cate) {
 										?>
-											<li><a href="<?= base_url('danh-muc/' . $cate->id.'/'.$cate->slug) ?>"><?= $cate->title ?></a></li>
+											<li><a href="<?= base_url('danh-muc/' . $cate->id . '/' . $cate->slug) ?>"><?= $cate->title ?></a></li>
 										<?php } ?>
 									</ul>
 								</li>
 								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
 									<ul role="menu" class="sub-menu">
-										<li><a href="blog.html">Blog List</a></li>
-										<li><a href="blog-single.html">Blog Single</a></li>
+										<?php
+										foreach ($blog as $key => $bl) {
+										?>
+											<li><a href="<?= base_url('danh-muc-blog/' . $bl->id . '/' . $bl->slug) ?>"><?= $bl->title ?></a></li>
+
+										<?php } ?>
 									</ul>
 								</li>
-								
-								<li><a href="<?= base_url('contact')?>">Contact</a></li>
+
+								<li><a href="<?= base_url('contact') ?>">Contact</a></li>
 							</ul>
 						</div>
 					</div>
