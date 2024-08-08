@@ -7,11 +7,6 @@ class BlogModel extends CI_Model
 		return $this->db->insert('blogs', $data);
 	}
 
-	public function insertPost($data)
-	{
-		return $this->db->insert('posts', $data);
-	}
-
 	public function selectBlog()
 	{
 		$query =  $this->db->get('blogs');

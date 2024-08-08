@@ -32,6 +32,8 @@ class IndexModel extends CI_Model
 		return $query->result();
 	}
 
+
+
 	public function getBrandProduct($id)
 	{
 		$query =  $this->db->select('categories.title as tendanhmuc, products.*, brands.title as tenthuonghieu')
@@ -61,6 +63,17 @@ class IndexModel extends CI_Model
 		$this->db->from('categories');
 		$this->db->limit(1);
 		$this->db->where('categories.id', $id);
+		$query = $this->db->get();
+		$result = $query->row();
+		return $title = $result->title;
+	}
+
+	public function getBlogTitle($id)
+	{
+		$this->db->select('blogs.*');
+		$this->db->from('blogs');
+		$this->db->limit(1);
+		$this->db->where('blogs.id', $id);
 		$query = $this->db->get();
 		$result = $query->row();
 		return $title = $result->title;

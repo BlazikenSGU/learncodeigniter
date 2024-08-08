@@ -61,6 +61,16 @@ $route['blog/edit/(:any)']['GET'] = 'BlogController/edit/$1';
 $route['blog/update/(:any)']['POST'] = 'BlogController/update/$1';
 $route['blog/delete/(:any)']['GET'] = 'BlogController/delete/$1';
 $route['danh-muc-blog/(:any)/(:any)']['GET'] = 'IndexController/blog/$1/$2';
+$route['blog-detail/(:any)/(:any)']['GET'] = 'IndexController/blog_detail/$1/$2';
+
+//post
+$route['post/create']['GET'] = 'PostController/create';
+$route['post/list']['GET'] = 'PostController/index';
+$route['post/store']['POST'] = 'PostController/store';
+$route['post/edit/(:any)']['GET'] = 'PostController/edit/$1';
+$route['post/update/(:any)']['POST'] = 'PostController/update/$1';
+$route['post/delete/(:any)']['GET'] = 'PostController/delete/$1';
+
 
 //Category
 $route['category/create']['GET'] = 'CategoryController/create';
