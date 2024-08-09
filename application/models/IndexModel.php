@@ -32,6 +32,21 @@ class IndexModel extends CI_Model
 		return $query->result();
 	}
 
+	public function getBlogDetailById($id)
+	{
+		$query =  $this->db->get_where('posts', ['id' => $id]);
+		return $query->row();
+	}
+
+	public function getBlogById($id)
+	{
+		$query =  $this->db->select('blogs.title as tendanhmuc, posts.*,')
+			->from('blogs')
+			->join('posts', 'posts.blog_id=blogs.id')
+			->where('posts.blog_id', $id)
+			->get();
+		return $query->result();
+	}
 
 
 	public function getBrandProduct($id)
@@ -74,6 +89,17 @@ class IndexModel extends CI_Model
 		$this->db->from('blogs');
 		$this->db->limit(1);
 		$this->db->where('blogs.id', $id);
+		$query = $this->db->get();
+		$result = $query->row();
+		return $title = $result->title;
+	}
+
+	public function getPostTitle($id)
+	{
+		$this->db->select('posts.*');
+		$this->db->from('posts');
+		$this->db->limit(1);
+		$this->db->where('posts.id', $id);
 		$query = $this->db->get();
 		$result = $query->row();
 		return $title = $result->title;

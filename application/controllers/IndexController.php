@@ -136,6 +136,7 @@ class IndexController extends CI_Controller
 
 		// $this->data['blog_product'] = $this->IndexModel->getBlogAll($id);
 		$this->data['title'] = $this->IndexModel->getBlogTitle($id);
+		$this->data['blog_with_id'] = $this->IndexModel->getBlogById($id);
 		$this->config->config['pageTitle'] = $this->data['title'];
 		$this->load->view('pages/template/header', $this->data);
 		$this->load->view('pages/blog', $this->data);
@@ -625,10 +626,13 @@ class IndexController extends CI_Controller
 		$this->load->view('pages/template/footer');
 	}
 
-	public function blog_detail()
+	public function blog_detail($id)
 	{
 		$this->load->view('pages/template/header', $this->data);
-		$this->load->view('pages/blog_detail');
+
+		$this->data['title'] = $this->IndexModel->getPostTitle($id);
+		$this->data['post'] = $this->IndexModel->getBlogDetailById($id);
+		$this->load->view('pages/blog_detail', $this->data);
 		$this->load->view('pages/template/footer');
 	}
 

@@ -22,8 +22,6 @@
                     <?php echo '<span class="text text-danger">' . form_error('title') . '</span>'; ?>
                 </div>
 
-               
-              
                 <div class="form-group">
                     <label for="exampleInputEmail1">Slug</label>
                     <input name="slug" type="text" class="form-control" id="convert_slug" aria-describedby="emailHelp">

@@ -1,4 +1,7 @@
 <?php
+
+use Carbon\Carbon;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 
@@ -17,8 +20,10 @@ class BlogController extends CI_Controller
 		$this->checkLogin();
 		$this->load->view('admin_template/header');
 		$this->load->view('admin_template/navbar');
+
 		$this->load->model('BlogModel');
 		$data['blog'] = $this->BlogModel->selectBlog();
+
 		$this->load->view('blog/list', $data);
 		$this->load->view('admin_template/footer');
 	}
@@ -63,6 +68,7 @@ class BlogController extends CI_Controller
 					'description' => $this->input->post('description'),
 					'slug' => $this->input->post('slug'),
 					'status' => $this->input->post('status'),
+					
 					'image' => $blog_filename
 				];
 				$this->load->model('BlogModel');
@@ -118,6 +124,7 @@ class BlogController extends CI_Controller
 						'description' => $this->input->post('description'),
 						'slug' => $this->input->post('slug'),
 						'status' => $this->input->post('status'),
+						
 						'image' => $blog_filename
 					];
 				}
@@ -127,6 +134,8 @@ class BlogController extends CI_Controller
 					'description' => $this->input->post('description'),
 					'slug' => $this->input->post('slug'),
 					'status' => $this->input->post('status'),
+					
+
 				];
 			}
 			$this->load->model('BlogModel');
