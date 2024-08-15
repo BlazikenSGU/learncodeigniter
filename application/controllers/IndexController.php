@@ -8,6 +8,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class IndexController extends CI_Controller
 {
 
+	public function checkLogin()
+	{
+		if (!$this->session->userdata('LoggedInCustomer')) {
+			redirect(base_url('/dang-nhap'));
+		}
+	}
+
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -278,19 +286,36 @@ class IndexController extends CI_Controller
 		$this->load->view('pages/template/footer');
 	}
 
+
+
 	public function add_to_cart()
 	{
 		$product_id = $this->input->post('product_id');
 		$quantity = $this->input->post('quantity');
 		$this->data['product_details'] = $this->IndexModel->getProductDetails($product_id);
 
-		if ($this->cart->contents() > 0) {
+		$this->checkLogin();
+
+		if ($this->cart->contents()) {
+			$exists_in_cart = false;
+
 			foreach ($this->cart->contents() as $items) {
 				if ($items['id'] == $product_id) {
 					$this->session->set_flashdata('success', 'Da co san trong gio hang!');
-					redirect(base_url() . 'gio-hang', 'refresh');
-				} else {
-					foreach ($this->data['product_details'] as $key => $pro) {
+					redirect($_SERVER['HTTP_REFERER'], 'refresh');
+					$exists_in_cart = true;
+					break;
+				}
+			}
+
+			// Nếu sản phẩm không có trong giỏ hàng
+			if (!$exists_in_cart) {
+				$product_found = false;
+
+				foreach ($this->data['product_details'] as $key => $pro) {
+					if ($pro->id == $product_id) {
+						$product_found = true;
+
 						if ($pro->quantity >= $quantity) {
 							$cart = array(
 								'id' => $pro->id,
@@ -299,16 +324,46 @@ class IndexController extends CI_Controller
 								'name' => $pro->title,
 								'options' => array('image' => $pro->image, 'stock' => $pro->quantity),
 							);
+							break;
 						} else {
 							$this->session->set_flashdata('error', 'Khong du so luong san pham de ban!');
 							redirect($_SERVER['HTTP_REFERER']);
 						}
 					}
 				}
+
+				if ($product_found && !empty($cart)) {
+					$this->session->set_flashdata('success', 'Them vao gio hang thanh cong!');
+					$this->cart->insert($cart);
+					redirect(base_url() . 'gio-hang', 'refresh');
+				} else {
+					// Xử lý khi không tìm thấy sản phẩm
+					$this->session->set_flashdata('error', 'San pham khong ton tai!');
+					redirect($_SERVER['HTTP_REFERER']);
+				}
 			}
-			$this->session->set_flashdata('success', 'Them vao gio hang thanh cong!');
-			$this->cart->insert($cart);
-			redirect(base_url() . 'gio-hang', 'refresh');
+		} else {
+			// Xử lý khi giỏ hàng rỗng
+			foreach ($this->data['product_details'] as $key => $pro) {
+				if ($pro->id == $product_id) {
+					if ($pro->quantity >= $quantity) {
+						$cart = array(
+							'id' => $pro->id,
+							'qty' => $quantity,
+							'price' => $pro->price,
+							'name' => $pro->title,
+							'options' => array('image' => $pro->image, 'stock' => $pro->quantity),
+						);
+						$this->session->set_flashdata('success', 'Them vao gio hang thanh cong!');
+						$this->cart->insert($cart);
+						redirect(base_url() . 'gio-hang', 'refresh');
+					} else {
+						$this->session->set_flashdata('error', 'Khong du so luong san pham de ban!');
+						redirect($_SERVER['HTTP_REFERER']);
+					}
+					break;
+				}
+			}
 		}
 	}
 
@@ -683,5 +738,10 @@ class IndexController extends CI_Controller
 		} else {
 			echo 'failed';
 		}
+	}
+
+
+	public function online_checkout(){
+		
 	}
 }

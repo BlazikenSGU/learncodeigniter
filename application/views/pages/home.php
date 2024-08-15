@@ -5,9 +5,22 @@
 			<?php $this->load->view('pages/template/sidebar'); ?>
 
 			<div class="col-sm-9 padding-right">
+
 				<div class="features_items">
+
 					<!--features_items-->
 					<h2 class="title text-center">Features Items</h2>
+					<?php
+		if ($this->session->flashdata('success')) {
+		?>
+			<div class="alert alert-success"><?php echo $this->session->flashdata('success') ?></div>
+		<?php
+		} elseif ($this->session->flashdata('error')) {
+		?>
+			<div class="alert alert-danger"><?php echo $this->session->flashdata('error') ?></div>
+		<?php
+		}
+		?>
 
 					<?php foreach ($allproduct_pagination as $key => $pro) { ?>
 						<div class="col-sm-4">

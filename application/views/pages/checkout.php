@@ -107,7 +107,7 @@
 							}
 							?>
 							<h2>Infomation Receive</h2>
-							<form action="<?= base_url('confirmCheckout') ?>" onsubmit="return confirm('Xac nhan dat hang?')" method="POST">
+							<form action="<?= base_url('online-checkout') ?>" onsubmit="return confirm('Xac nhan dat hang?')" method="POST">
 								<input type="text" name="name" placeholder="Name" />
 								<?= form_error('name'); ?>
 								<input type="text" name="address" placeholder="Address" />
@@ -117,13 +117,16 @@
 								<input type="text" name="email" placeholder="Email" />
 								<?= form_error('email'); ?>
 								<label for="">Hinh thuc thanh toan: </label>
+								<!-- 
 								<select name="shipMethod">
 									<option value="cod">COD</option>
 									<option value="vnpay">VNPAY</option>
 									<option value="momo">MOMO</option>
-								</select>
+								</select> -->
 
-								<button type="submit" class="btn btn-default">Confirm Payment</button>
+								<button type="submit" name="cod" class="btn btn-default">Thanh toan COD</button>
+								<button type="submit" name="payUrl" class="btn btn-danger">Thanh toan MOMO</button>
+								<button type="submit" name="vnpay" class="btn btn-success">Thanh toan VNPAY</button>
 							</form>
 						</div>
 						<!--/login form-->

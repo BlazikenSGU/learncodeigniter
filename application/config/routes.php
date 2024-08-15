@@ -19,6 +19,7 @@ $route['dang-ky']['POST'] = 'IndexController/signup';
 $route['dang-xuat']['GET'] = 'IndexController/logout';
 $route['checkout']['GET'] = 'IndexController/checkout';
 $route['confirmCheckout']['POST'] = 'IndexController/confirmCheckout';
+$route['online-checkout']['POST'] = 'OnlineCheckoutController/online_checkout';
 $route['login-customer']['POST'] = 'IndexController/login_customer';
 $route['thanks']['GET'] = 'IndexController/thanks';
 $route['tim-kiem']['GET'] = 'IndexController/tim_kiem';
