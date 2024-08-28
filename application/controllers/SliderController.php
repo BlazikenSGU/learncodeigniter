@@ -81,7 +81,7 @@ class SliderController extends CI_Controller
 				$this->load->model('SliderModel');
 				$this->SliderModel->insertSlider($data);
 				$this->session->set_flashdata('success', 'Add success');
-				redirect(base_url('slider/create'));
+				redirect(base_url('slider/list'));
 			}
 		} else {
 			$this->create();

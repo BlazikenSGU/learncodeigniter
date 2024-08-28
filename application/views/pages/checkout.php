@@ -107,15 +107,19 @@
 							}
 							?>
 							<h2>Infomation Receive</h2>
-							<form action="<?= base_url('online-checkout') ?>" onsubmit="return confirm('Xac nhan dat hang?')" method="POST">
-								<input type="text" name="name" placeholder="Name" />
-								<?= form_error('name'); ?>
+							<form action="<?= base_url('online-checkout') ?>" onsubmit="return confirm('Xac nhan dat hang?')" method="POST" enctype="multipart/form-data">
+								<input type="text" name="name" class="form-control"  placeholder="Name" />
+								<?php echo '<span class="text text-danger">' . form_error('name') . '</span>'; ?>
+								
 								<input type="text" name="address" placeholder="Address" />
 								<?= form_error('address'); ?>
+								
 								<input type="text" name="phone" placeholder="Phone" />
 								<?= form_error('phone'); ?>
+								
 								<input type="text" name="email" placeholder="Email" />
 								<?= form_error('email'); ?>
+								
 								<label for="">Hinh thuc thanh toan: </label>
 								<!-- 
 								<select name="shipMethod">
@@ -123,7 +127,7 @@
 									<option value="vnpay">VNPAY</option>
 									<option value="momo">MOMO</option>
 								</select> -->
-
+							
 								<button type="submit" name="cod" class="btn btn-default">Thanh toan COD</button>
 								<button type="submit" name="payUrl" class="btn btn-danger">Thanh toan MOMO</button>
 								<button type="submit" name="vnpay" class="btn btn-success">Thanh toan VNPAY</button>

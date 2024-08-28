@@ -16,10 +16,7 @@ class DashboardController extends CI_Controller
     public function index()
     {
         $this->checkLogin();
-        $this->load->view('admin_template/header');
-        $this->load->view('admin_template/navbar');
         $this->load->view('dashboard/index');
-        $this->load->view('admin_template/footer');
     }
 
     public function logout()

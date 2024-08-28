@@ -406,6 +406,7 @@ class IndexController extends CI_Controller
 	public function checkout()
 	{
 		$this->config->config['pageTitle'] = 'Checkout Payment';
+		$this->load->library('form_validation');
 		if ($this->session->userdata('LoggedInCustomer') && $this->cart->contents()) {
 			$this->load->view('pages/template/header', $this->data);
 			$this->load->view('pages/checkout');
