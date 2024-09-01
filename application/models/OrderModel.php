@@ -12,6 +12,23 @@ class OrderModel extends CI_Model
         return $query->result();
     }
 
+	public function selectUserAdmin()
+    {
+        $query =  $this->db->select('users.*')
+            ->from('users')
+          
+            ->get();
+        return $query->result();
+    }
+
+	public function selectCustomer()
+    {
+        $query =  $this->db->select('customers.*')
+            ->from('customers')
+            ->get();
+        return $query->result();
+    }
+
     public function selectOrderDetails($order_code)
     {
         $query =  $this->db->select('orders.order_code, orders.status as order_status, order_details.quantity as qty, order_details.order_code, order_details.product_id, products.*')

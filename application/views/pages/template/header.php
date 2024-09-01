@@ -30,11 +30,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <!--/head-->
 
 <body>
-	<header id="header">
+	<!-- <header id="header"> -->
 		<!--header-->
-		<div class="header_top">
+		<!-- <div class="header_top"> -->
 			<!--header_top-->
-			<div class="container">
+			<!-- <div class="container">
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="contactinfo">
@@ -56,13 +56,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+			</div> -->
+		<!-- </div> -->
 		<!--/header_top-->
 
-		<div class="header-middle">
+		<!-- <div class="header-middle"> -->
 			<!--header-middle-->
-			<div class="container">
+			<!-- <div class="container">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
@@ -93,13 +93,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+			</div> -->
+		<!-- </div> -->
 		<!--/header-middle-->
 
-		<div class="header-bottom">
+		<!-- <div class="header-bottom"> -->
 			<!--header-bottom-->
-			<div class="container">
+			<!-- <div class="container">
 				<div class="row">
 					<div class="col-sm-9">
 						<div class="navbar-header">
@@ -147,8 +147,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+			</div> -->
+		<!-- </div> -->
 		<!--/header-bottom-->
-	</header>
+	<!-- </header> -->
 	<!--/header-->

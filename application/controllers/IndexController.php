@@ -98,11 +98,13 @@ class IndexController extends CI_Controller
 		//show san pham theo danh muc
 		$this->data['item_categories'] = $this->IndexModel->ItemCategories();
 
-		$this->load->view('pages/template/header', $this->data);
-		$this->load->view('pages/template/slider');
+		$this->load->view('pages/template/header2');
+		$this->load->view('pages/template/sidebar', $this->data);
+		// $this->load->view('pages/template/slider');
 
-		$this->load->view('pages/home', $this->data);
-		$this->load->view('pages/template/footer');
+
+		$this->load->view('pages/home2', $this->data);
+		$this->load->view('pages/template/footer2');
 	}
 
 	public function blog($id)
@@ -268,14 +270,18 @@ class IndexController extends CI_Controller
 		foreach ($this->data['product_details'] as $key => $val) {
 			$category_id = $val->category_id;
 		}
+
+
+		//cac san pham khac
 		$this->data['product_related'] = $this->IndexModel->getProductRelated($id, $category_id);
 
 		$this->data['title'] = $this->IndexModel->getProductTitle($id);
 		$this->config->config['pageTitle'] = $this->data['title'];
 
-		$this->load->view('pages/template/header', $this->data);
-		$this->load->view('pages/product_details', $this->data);
-		$this->load->view('pages/template/footer');
+		$this->load->view('pages/template/header3');
+		$this->load->view('pages/template/sidebar', $this->data);
+		$this->load->view('pages/product_detail2', $this->data);
+		$this->load->view('pages/template/footer2');
 	}
 
 	public function cart()
@@ -742,7 +748,20 @@ class IndexController extends CI_Controller
 	}
 
 
-	public function online_checkout(){
-		
+	public function online_checkout()
+	{
+	}
+
+	public function shop()
+	{
+		$this->config->config['pageTitle'] = 'Shop';
+		$this->load->view('pages/template/header3');
+		$this->load->view('pages/template/sidebar', $this->data);
+
+		$this->data['allproduct'] = $this->IndexModel->getAllProduct();
+
+
+		$this->load->view('pages/shop', $this->data);
+		$this->load->view('pages/template/footer2');
 	}
 }

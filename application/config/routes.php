@@ -23,6 +23,7 @@ $route['online-checkout']['POST'] = 'OnlineCheckoutController/online_checkout';
 $route['login-customer']['POST'] = 'IndexController/login_customer';
 $route['thanks']['GET'] = 'IndexController/thanks';
 $route['tim-kiem']['GET'] = 'IndexController/tim_kiem';
+$route['shop']['GET'] = 'IndexController/shop';
 
 //pagination
 $route['pagination/(:num)'] = 'IndexController/index/$1';
@@ -110,3 +111,7 @@ $route['send_contact']['POST'] = 'IndexController/send_contact';
 
 //comment
 $route['comment/send']['POST'] = 'IndexController/comment_send';
+
+//get user & admin
+$route['user/admin']['GET'] = 'OrderController/user_admin';
+$route['user/customer']['GET'] = 'OrderController/customer';

@@ -133,4 +133,25 @@ class OrderController extends CI_Controller
 		$pdf->writeHTML($html, true, false, true, false, '');
 		$pdf->Output('Order: ' . $order_code . '.pdf', 'I');
 	}
+
+
+	public function user_admin()
+	{
+		$this->checkLogin();
+
+		$this->load->model('OrderModel');
+		$data['admin'] = $this->OrderModel->selectUserAdmin();
+
+		$this->load->view('order/admin', $data);
+	}
+
+	public function customer()
+	{
+		$this->checkLogin();
+
+		$this->load->model('OrderModel');
+		$data['customer'] = $this->OrderModel->selectCustomer();
+
+		$this->load->view('order/customer', $data);
+	}
 }

@@ -77,7 +77,7 @@
 					</ul>
 				</li>
 
-				<li class="menu-item has-children">
+				<!-- <li class="menu-item has-children">
 					<a href="javascript:void(0);" class="menu-item-button">
 						<div class="icon"><i class="icon-file-plus"></i></div>
 						<div class="text">Order</div>
@@ -94,9 +94,9 @@
 							</a>
 						</li>
 					</ul>
-				</li>
+				</li> -->
 				<li class="menu-item has-children">
-				<a href="javascript:void(0);" class="menu-item-button">
+					<a href="javascript:void(0);" class="menu-item-button">
 						<div class="icon"><i class="icon-image"></i></div>
 						<div class="text">Slider</div>
 					</a>
@@ -113,26 +113,79 @@
 						</li>
 					</ul>
 				</li>
+				<li class="menu-item has-children">
+					<a href="javascript:void(0);" class="menu-item-button">
+						<div class="icon"><i class="icon-layers"></i></div>
+						<div class="text">Blog</div>
+					</a>
+					<ul class="sub-menu">
+						<li class="sub-menu-item">
+							<a href="<?php echo base_url('blog/create'); ?>" class="">
+								<div class="text">New Blog</div>
+							</a>
+						</li>
+						<li class="sub-menu-item">
+							<a href="<?php echo base_url('blog/list'); ?>" class="">
+								<div class="text">Blog</div>
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="menu-item has-children">
+					<a href="javascript:void(0);" class="menu-item-button">
+						<div class="icon"><i class="icon-layers"></i></div>
+						<div class="text">Post</div>
+					</a>
+					<ul class="sub-menu">
+						<li class="sub-menu-item">
+							<a href="<?php echo base_url('post/create'); ?>" class="">
+								<div class="text">New Post</div>
+							</a>
+						</li>
+						<li class="sub-menu-item">
+							<a href="<?php echo base_url('post/list'); ?>" class="">
+								<div class="text">Post</div>
+							</a>
+						</li>
+					</ul>
+				</li>
+
+
 				<li class="menu-item">
-					<a href="#" class="">
-						<div class="icon"><i class="icon-grid"></i></div>
-						<div class="text">Coupns</div>
+					<a href="<?php echo base_url('order/list'); ?>" class="">
+						<div class="icon"><i class="icon-file-plus"></i></div>
+						<div class="text">Order</div>
 					</a>
 				</li>
 
-				<li class="menu-item">
-					<a href="#" class="">
+
+
+				<li class="menu-item has-children">
+					<a href="javascript:void(0);" class="menu-item-button">
 						<div class="icon"><i class="icon-user"></i></div>
 						<div class="text">User</div>
 					</a>
+					<ul class="sub-menu">
+						<li class="sub-menu-item">
+							<a href="<?php echo base_url('user/admin'); ?>" class="">
+								<div class="text">Admin</div>
+							</a>
+						</li>
+						<li class="sub-menu-item">
+							<a href="<?php echo base_url('user/customer'); ?>" class="">
+								<div class="text">User order</div>
+							</a>
+						</li>
+					</ul>
 				</li>
 
 				<li class="menu-item">
-					<a href="#" class="">
+					<a href="<?php echo base_url('logout'); ?>" class="">
 						<div class="icon"><i class="icon-settings"></i></div>
-						<div class="text">Settings</div>
+						<div class="text">(<?php echo $this->session->userdata('LoggedIn')['username'] ?>) - Log out</div>
 					</a>
 				</li>
+
 			</ul>
 
 		</div>
