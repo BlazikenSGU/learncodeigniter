@@ -37,8 +37,8 @@
 			<!-- Menu desktop -->
 			<div class="menu-desktop">
 				<ul class="main-menu">
-					
-					<li class="<?= (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] === '/' || strpos($_SERVER['REQUEST_URI'],'home') !== false) ? 'active-menu' : '' ?> ">
+
+					<li class="<?= (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] === '/' || strpos($_SERVER['REQUEST_URI'], 'home') !== false) ? 'active-menu' : '' ?> ">
 						<a href="<?= base_url('') ?>">Home</a>
 					</li>
 
@@ -47,34 +47,34 @@
 					</li>
 
 					<li class="<?= (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], 'category') !== false) ? 'active-menu' : '' ?> ">
-						<a href="product.html">Category</a>
+						<a href="<?= base_url('shop') ?>">Category</a>
 						<ul>
 							<?php
 							foreach ($category as $key => $cate) {
 							?>
-								<li><a href="product1.html"><?= $cate->title ?></a></li>
+								<li><a href="<?= base_url('shop') ?>"><?= $cate->title ?></a></li>
 
 							<?php } ?>
 						</ul>
 					</li>
 					<li>
-						<a href="product.html">Brand</a>
+						<a href="<?= base_url('shop') ?>">Brand</a>
 						<ul>
 							<?php
 							foreach ($brand as $key => $cate) {
 							?>
-								<li><a href="product1.html"><?= $cate->title ?></a></li>
+								<li><a href="<?= base_url('shop') ?>"><?= $cate->title ?></a></li>
 
 							<?php } ?>
 						</ul>
 					</li>
 
 					<li>
-						<a href="<?= base_url('post') ?>">Blog</a>
+						<a href="<?= base_url('blog') ?>">Blog</a>
 					</li>
 
 					<li>
-						<a href="about.html">About</a>
+						<a href="<?= base_url('about') ?>">About</a>
 					</li>
 
 					<li>
@@ -84,17 +84,20 @@
 			</div>
 
 			<!-- Icon header -->
+			<style>
+
+			</style>
 			<div class="wrap-icon-header flex-w flex-r-m">
 				<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-					<i class="zmdi zmdi-shopping-cart"></i>
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<?= (count($this->cart->contents())) ?>">
+					<a style="color: black;" href="<?= base_url('cart') ?>"> <i class="zmdi zmdi-shopping-cart"></i></a>
 				</div>
 
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-					<i class="zmdi zmdi-favorite-outline"></i>
+				<a href="<?= base_url('user')?>" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 " >
+					<i class="zmdi zmdi-account-circle"></i>
 				</a>
 			</div>
 		</nav>
@@ -186,7 +189,7 @@
 		</li>
 
 		<li>
-			<a href="about.html">About</a>
+			<a href="<?= base_url('about') ?>">About</a>
 		</li>
 
 		<li>

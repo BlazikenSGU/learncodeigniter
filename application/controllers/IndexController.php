@@ -107,50 +107,57 @@ class IndexController extends CI_Controller
 		$this->load->view('pages/template/footer2');
 	}
 
-	public function blog($id)
+	public function blog()
 	{
 
-		$this->data['slug'] = $this->IndexModel->getBlogSlug($id);
-		//custom config link
-		$config = array();
-		$config["base_url"] = base_url() . '/danh-muc-blog' . '/' . $id . '/' . $this->data['slug'];
-		$config['total_rows'] = ceil($this->IndexModel->countAllProductByCate($id)); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
-		$config["per_page"] = 3; //từng trang 3 sản phẩn
-		$config["uri_segment"] = 4; //lấy số trang hiện tại
-		$config['use_page_numbers'] = TRUE; //trang có số
+		// $this->data['slug'] = $this->IndexModel->getBlogSlug($id);
+		// //custom config link
+		// $config = array();
+		// $config["base_url"] = base_url() . '/danh-muc-blog' . '/' . $id . '/' . $this->data['slug'];
+		// $config['total_rows'] = ceil($this->IndexModel->countAllProductByCate($id)); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
+		// $config["per_page"] = 3; //từng trang 3 sản phẩn
+		// $config["uri_segment"] = 4; //lấy số trang hiện tại
+		// $config['use_page_numbers'] = TRUE; //trang có số
 
-		$config['full_tag_open'] = '<ul class="pagination">';
-		$config['full_tag_close'] = '</ul>';
-		$config['first_link'] = 'First';
-		$config['first_tag_open'] = '<li>';
-		$config['first_tag_close'] = '</li>';
-		$config['last_link'] = 'Last';
-		$config['last_tag_open'] = '<li>';
-		$config['last_tag_close'] = '</li>';
-		$config['cur_tag_open'] = '<li class="active"><a>';
-		$config['cur_tag_close'] = '</a></li>';
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['next_tag_open'] = '<li>';
-		$config['next_tag_close'] = '</li>';
-		$config['prev_tag_open'] = '<li>';
-		$config['prev_tag_close'] = '</li>';
-		//end custom config link
-		$this->pagination->initialize($config); //tự động tạo trang
-		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 1; //current page active 
-		$offset = ($page - 1) * $config['per_page'];
-		$this->data["links"] = $this->pagination->create_links(); //tự động tạo links phân trang dựa vào trang hiện tại
-		// $this->data['allproductbycate_pagination'] = $this->IndexModel->getCatePagination($id, $config["per_page"], $offset);
-		// //pagination
+		// $config['full_tag_open'] = '<ul class="pagination">';
+		// $config['full_tag_close'] = '</ul>';
+		// $config['first_link'] = 'First';
+		// $config['first_tag_open'] = '<li>';
+		// $config['first_tag_close'] = '</li>';
+		// $config['last_link'] = 'Last';
+		// $config['last_tag_open'] = '<li>';
+		// $config['last_tag_close'] = '</li>';
+		// $config['cur_tag_open'] = '<li class="active"><a>';
+		// $config['cur_tag_close'] = '</a></li>';
+		// $config['num_tag_open'] = '<li>';
+		// $config['num_tag_close'] = '</li>';
+		// $config['next_tag_open'] = '<li>';
+		// $config['next_tag_close'] = '</li>';
+		// $config['prev_tag_open'] = '<li>';
+		// $config['prev_tag_close'] = '</li>';
+		// //end custom config link
+		// $this->pagination->initialize($config); //tự động tạo trang
+		// $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 1; //current page active 
+		// $offset = ($page - 1) * $config['per_page'];
+		// $this->data["links"] = $this->pagination->create_links(); //tự động tạo links phân trang dựa vào trang hiện tại
+		// // $this->data['allproductbycate_pagination'] = $this->IndexModel->getCatePagination($id, $config["per_page"], $offset);
+		// // //pagination
 
 
-		// $this->data['blog_product'] = $this->IndexModel->getBlogAll($id);
-		$this->data['title'] = $this->IndexModel->getBlogTitle($id);
-		$this->data['blog_with_id'] = $this->IndexModel->getBlogById($id);
-		$this->config->config['pageTitle'] = $this->data['title'];
-		$this->load->view('pages/template/header', $this->data);
+		// // $this->data['blog_product'] = $this->IndexModel->getBlogAll($id);
+		// $this->data['title'] = $this->IndexModel->getBlogTitle($id);
+		// $this->data['blog_with_id'] = $this->IndexModel->getBlogById($id);
+		// $this->config->config['pageTitle'] = $this->data['title'];
+		// $this->load->view('pages/template/header', $this->data);
+		// $this->load->view('pages/blog', $this->data);
+		// $this->load->view('pages/template/footer');
+
+		$this->data['post'] = $this->IndexModel->getPostAll();
+		$this->config->config['pageTitle'] = 'Blog';
+		$this->load->view('pages/template/header3', $this->data);
+		$this->load->view('pages/template/sidebar', $this->data);
 		$this->load->view('pages/blog', $this->data);
-		$this->load->view('pages/template/footer');
+		$this->load->view('pages/template/footer2');
 	}
 
 	public function category($id)
@@ -287,9 +294,11 @@ class IndexController extends CI_Controller
 	public function cart()
 	{
 		$this->config->config['pageTitle'] = 'Cart';
-		$this->load->view('pages/template/header', $this->data);
-		$this->load->view('pages/cart');
-		$this->load->view('pages/template/footer');
+
+		$this->load->view('pages/template/header3');
+		$this->load->view('pages/template/sidebar', $this->data);
+		$this->load->view('pages/cart2', $this->data);
+		$this->load->view('pages/template/footer2');
 	}
 
 
@@ -298,6 +307,7 @@ class IndexController extends CI_Controller
 	{
 		$product_id = $this->input->post('product_id');
 		$quantity = $this->input->post('quantity');
+
 		$this->data['product_details'] = $this->IndexModel->getProductDetails($product_id);
 
 		$this->checkLogin();
@@ -341,7 +351,7 @@ class IndexController extends CI_Controller
 				if ($product_found && !empty($cart)) {
 					$this->session->set_flashdata('success', 'Them vao gio hang thanh cong!');
 					$this->cart->insert($cart);
-					redirect(base_url() . 'gio-hang', 'refresh');
+					redirect(base_url() . 'cart', 'refresh');
 				} else {
 					// Xử lý khi không tìm thấy sản phẩm
 					$this->session->set_flashdata('error', 'San pham khong ton tai!');
@@ -362,7 +372,7 @@ class IndexController extends CI_Controller
 						);
 						$this->session->set_flashdata('success', 'Them vao gio hang thanh cong!');
 						$this->cart->insert($cart);
-						redirect(base_url() . 'gio-hang', 'refresh');
+						redirect(base_url() . 'cart', 'refresh');
 					} else {
 						$this->session->set_flashdata('error', 'Khong du so luong san pham de ban!');
 						redirect($_SERVER['HTTP_REFERER']);
@@ -376,12 +386,13 @@ class IndexController extends CI_Controller
 	public function delete_all_cart()
 	{
 		$this->cart->destroy();
-		redirect(base_url() . 'gio-hang', 'refresh');
+		redirect(base_url() . 'cart', 'refresh');
 	}
+
 	public function delete_item($rowid)
 	{
 		$this->cart->remove($rowid);
-		redirect(base_url() . 'gio-hang', 'refresh');
+		redirect(base_url() . 'cart', 'refresh');
 	}
 
 	public function update_cart_item()
@@ -412,13 +423,15 @@ class IndexController extends CI_Controller
 	public function checkout()
 	{
 		$this->config->config['pageTitle'] = 'Checkout Payment';
+
 		$this->load->library('form_validation');
+
 		if ($this->session->userdata('LoggedInCustomer') && $this->cart->contents()) {
 			$this->load->view('pages/template/header', $this->data);
 			$this->load->view('pages/checkout');
 			$this->load->view('pages/template/footer');
 		} else {
-			redirect(base_url('/gio-hang'));
+			redirect(base_url(''));
 		}
 	}
 
@@ -484,16 +497,17 @@ class IndexController extends CI_Controller
 				redirect(base_url('/thanks'));
 			} else {
 				$this->session->set_flashdata('error', 'PAYMENT FAILLL');
-				redirect(base_url('/checkout'));
+				redirect(base_url('/cart'));
 			}
 		} else {
-			$this->checkout();
+			$this->cart();
 		}
 	}
 
 	public function login()
 	{
 		$this->config->config['pageTitle'] = 'Login User | Register User';
+
 		$this->load->view('pages/template/header');
 		$this->load->view('pages/login');
 		$this->load->view('pages/template/footer');
@@ -526,7 +540,7 @@ class IndexController extends CI_Controller
 				];
 				$this->session->set_userdata('LoggedInCustomer', $session_array);
 				$this->session->set_flashdata('success', 'LOGIN SUCCESS');
-				redirect(base_url('/checkout'));
+				redirect(base_url('/user'));
 			} else {
 				$this->session->set_flashdata('error', 'Kiem tra xac thuc tai khoan Hoac mat khau.');
 				redirect(base_url('/dang-nhap'));
@@ -595,9 +609,11 @@ class IndexController extends CI_Controller
 	public function thanks()
 	{
 		$this->config->config['pageTitle'] = 'Thanks';
-		$this->load->view('pages/template/header', $this->data);
-		$this->load->view('pages/thanks');
-		$this->load->view('pages/template/footer');
+
+		$this->load->view('pages/template/header3');
+		$this->load->view('pages/template/sidebar', $this->data);
+		$this->load->view('pages/thanks', $this->data);
+		$this->load->view('pages/template/footer2');
 	}
 	public function tim_kiem()
 	{
@@ -690,20 +706,39 @@ class IndexController extends CI_Controller
 
 	public function blog_detail($id)
 	{
-		$this->load->view('pages/template/header', $this->data);
+		$this->config->config['pageTitle'] = 'Blog_detail';
+
+		$this->load->view('pages/template/header3');
+		$this->load->view('pages/template/sidebar', $this->data);
 
 		$this->data['title'] = $this->IndexModel->getPostTitle($id);
+
 		$this->data['post'] = $this->IndexModel->getBlogDetailById($id);
 		$this->load->view('pages/blog_detail', $this->data);
-		$this->load->view('pages/template/footer');
+		$this->load->view('pages/template/footer2');
 	}
 
 	public function contact()
 	{
 		$this->config->config['pageTitle'] = 'Contact';
-		$this->load->view('pages/template/header', $this->data);
-		$this->load->view('pages/contact');
-		$this->load->view('pages/template/footer');
+
+		$this->load->view('pages/template/header3');
+		$this->load->view('pages/template/sidebar', $this->data);
+		$this->load->view('pages/contact', $this->data);
+		$this->load->view('pages/template/footer2');
+	}
+
+	
+	public function user()
+	{
+
+		$this->checkLogin();
+		$this->config->config['pageTitle'] = 'Profile';
+
+		$this->load->view('pages/template/header3');
+		$this->load->view('pages/template/sidebar', $this->data);
+		$this->load->view('pages/user', $this->data);
+		$this->load->view('pages/template/footer2');
 	}
 
 	public function send_contact()
@@ -750,6 +785,19 @@ class IndexController extends CI_Controller
 
 	public function online_checkout()
 	{
+	}
+
+	public function about()
+	{
+		$this->config->config['pageTitle'] = 'About';
+		$this->load->view('pages/template/header3');
+		$this->load->view('pages/template/sidebar', $this->data);
+
+		$this->data['allproduct'] = $this->IndexModel->getAllProduct();
+
+
+		$this->load->view('pages/about', $this->data);
+		$this->load->view('pages/template/footer2');
 	}
 
 	public function shop()

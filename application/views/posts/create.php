@@ -1,4 +1,3 @@
-
 <!-- test -->
 
 <?php require_once('./application/views/admin_template/header_admin.php') ?>
@@ -22,7 +21,6 @@
 									<i class="icon-menu-left"></i>
 								</div>
 
-
 								<form class="form-search flex-grow">
 									<fieldset class="name">
 										<input type="text" placeholder="Search here..." class="show-search" name="name" tabindex="2" value="" aria-required="true" required="">
@@ -30,14 +28,10 @@
 									<div class="button-submit">
 										<button class="" type="submit"><i class="icon-search"></i></button>
 									</div>
-
 								</form>
 
 							</div>
 							<div class="header-grid">
-
-
-
 							</div>
 						</div>
 					</div>
@@ -70,6 +64,18 @@
 									</ul>
 								</div>
 								<!-- new-category -->
+
+								<?php
+								if ($this->session->flashdata('success')) {
+								?>
+									<div class="alert alert-success"><?php echo $this->session->flashdata('success') ?></div>
+								<?php
+								} elseif ($this->session->flashdata('error')) {
+								?>
+									<div class="alert alert-danger"><?php echo $this->session->flashdata('error') ?></div>
+								<?php
+								}
+								?>
 
 								<div class="wg-box">
 									<form class="form-new-product form-style-1" action="<?php echo base_url('post/store') ?>" method="POST" enctype="multipart/form-data">

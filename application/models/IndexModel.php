@@ -21,6 +21,12 @@ class IndexModel extends CI_Model
 		return $query->result();
 	}
 
+	public function getPostAll()
+	{
+		$query =  $this->db->get_where('posts', ['status' => 1]);
+		return $query->result();
+	}
+
 	public function getCategoryProduct($id)
 	{
 		$query =  $this->db->select('categories.title as tendanhmuc, products.*, brands.title as tenthuonghieu')

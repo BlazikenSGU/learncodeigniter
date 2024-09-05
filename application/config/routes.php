@@ -9,7 +9,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['danh-muc/(:any)/(:any)']['GET'] = 'IndexController/category/$1/$2';
 $route['thuong-hieu/(:any)/(:any)']['GET'] = 'IndexController/brand/$1/$2';
 $route['san-pham/(:any)/(:any)']['GET'] = 'IndexController/product/$1/$2';
-$route['gio-hang']['GET'] = 'IndexController/cart';
+$route['cart']['GET'] = 'IndexController/cart';
 $route['add-to-cart']['POST'] = 'IndexController/add_to_cart';
 $route['delete-all-cart']['GET'] = 'IndexController/delete_all_cart';
 $route['delete-item/(:any)']['GET'] = 'IndexController/delete_item/$1';
@@ -24,6 +24,10 @@ $route['login-customer']['POST'] = 'IndexController/login_customer';
 $route['thanks']['GET'] = 'IndexController/thanks';
 $route['tim-kiem']['GET'] = 'IndexController/tim_kiem';
 $route['shop']['GET'] = 'IndexController/shop';
+$route['about']['GET'] = 'IndexController/about';
+$route['user']['GET'] = 'IndexController/user';
+
+
 
 //pagination
 $route['pagination/(:num)'] = 'IndexController/index/$1';
@@ -62,7 +66,7 @@ $route['blog/store']['POST'] = 'BlogController/store';
 $route['blog/edit/(:any)']['GET'] = 'BlogController/edit/$1';
 $route['blog/update/(:any)']['POST'] = 'BlogController/update/$1';
 $route['blog/delete/(:any)']['GET'] = 'BlogController/delete/$1';
-$route['danh-muc-blog/(:any)/(:any)']['GET'] = 'IndexController/blog/$1/$2';
+$route['blog']['GET'] = 'IndexController/blog';
 $route['blog-detail/(:any)/(:any)']['GET'] = 'IndexController/blog_detail/$1/$2';
 
 //post
