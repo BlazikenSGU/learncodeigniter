@@ -39,6 +39,7 @@
 								</tr>
 
 								<?php
+
 								foreach ($this->cart->contents() as $item) {
 									$subtotal = $item['qty'] * $item['price'];
 									$total += $subtotal;
@@ -71,8 +72,8 @@
 										</td>
 										<td class="column-5" style="padding-right: 20px"><?= number_format($subtotal, 0, ',', '.') ?> vnd</td>
 										<td class="column-6" style="padding: 0 1rem 1rem;">
-											 <a style="color: black;" class="cart_quantity_delete" href="<?= base_url('delete-item/' . $item['rowid']) ?>"><i class="fa fa-trash"></i></a>
-											 
+											<a style="color: black;" class="cart_quantity_delete" href="<?= base_url('delete-item/' . $item['rowid']) ?>"><i class="fa fa-trash"></i></a>
+
 										</td>
 									</tr>
 								<?php } ?>
@@ -131,24 +132,26 @@
 
 
 								<div class="">
+									<?php foreach ($user as $key => $value) {
+										if (($_SESSION['LoggedInCustomer']['id']) == $value->id) { ?>
+											<div class="bor8 bg0 m-b-12">
+												<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" value="<?= $value->name?>" name="name" placeholder="Name" required>
+											</div>
 
-									<div class="bor8 bg0 m-b-12">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name" placeholder="Name" required>
-									</div>
+											<div class="bor8 bg0 m-b-12">
+												<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="number" value="0<?= $value->phone?>" name="phone" placeholder="Phone" required>
+											</div>
 
-									<div class="bor8 bg0 m-b-12">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="number" name="phone" placeholder="Phone" required>
-									</div>
+											<div class="bor8 bg0 m-b-12">
+												<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" value="<?= $value->address?>" name="address" placeholder="Address" required>
+											</div>
 
-									<div class="bor8 bg0 m-b-12">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" placeholder="Address" required>
-									</div>
+											<div class="bor8 bg0 m-b-12">
+												<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" value="<?= $value->email?>" name="email" placeholder="Email" required>
+											</div>
 
-									<div class="bor8 bg0 m-b-12">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="email" placeholder="Email" required>
-									</div>
-
-
+									<?php }
+									} ?>
 									<!-- <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
 									<select class="js-select2" name="time">
 										<option>Select a country...</option>

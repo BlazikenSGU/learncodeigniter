@@ -28,6 +28,7 @@ class IndexController extends CI_Controller
 		$this->data['blog'] = $this->IndexModel->getBlogHome();
 		$this->data['slider'] = $this->IndexModel->getSliderHome();
 		$this->data['brand'] = $this->IndexModel->getBrandHome();
+		$this->data['user'] = $this->IndexModel->getUserHome();
 	}
 	//$to_email, $title, $message
 	public function send_mail($to_email, $title, $message)
@@ -97,6 +98,7 @@ class IndexController extends CI_Controller
 
 		//show san pham theo danh muc
 		$this->data['item_categories'] = $this->IndexModel->ItemCategories();
+		$this->data['allproduct'] = $this->IndexModel->getAllProduct();
 
 		$this->load->view('pages/template/header2');
 		$this->load->view('pages/template/sidebar', $this->data);
@@ -293,8 +295,9 @@ class IndexController extends CI_Controller
 
 	public function cart()
 	{
+		
 		$this->config->config['pageTitle'] = 'Cart';
-
+		$this->checkLogin();
 		$this->load->view('pages/template/header3');
 		$this->load->view('pages/template/sidebar', $this->data);
 		$this->load->view('pages/cart2', $this->data);
@@ -811,5 +814,27 @@ class IndexController extends CI_Controller
 
 		$this->load->view('pages/shop', $this->data);
 		$this->load->view('pages/template/footer2');
+	}
+	
+
+	public function user_history()
+	{
+
+		$this->checkLogin();
+		$this->config->config['pageTitle'] = 'Profile';
+
+		$this->load->view('pages/template/header3');
+		$this->load->view('pages/template/sidebar', $this->data);
+		$this->load->view('pages/user_history', $this->data);
+		$this->load->view('pages/template/footer2');
+	}
+
+	public function resume()
+	{
+
+	
+		$this->config->config['pageTitle'] = 'Resume';
+		$this->load->view('pages/resume');
+	
 	}
 }

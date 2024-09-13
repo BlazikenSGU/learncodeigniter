@@ -5,6 +5,78 @@
 <script src="/frontend/admin/js/apexcharts/apexcharts.js"></script>
 <script src="/frontend/admin/js/main.js"></script>
 
+<script src="/tinymce/tinymce.min.js"></script>
+
+<script>
+	const image_upload_handler_callback = (blobInfo, progress) => new Promise((resolve, reject) => {
+		const xhr = new XMLHttpRequest();
+		xhr.withCredentials = false;
+		xhr.open('POST', '/application/views/upload.php');
+
+		xhr.upload.onprogress = (e) => {
+			progress(e.loaded / e.total * 100);
+		}
+
+		xhr.onload = () => {
+			if (xhr.status === 403) {
+				reject({
+					message: 'HTTP  Error: ' + xhr.status,
+					remove: true
+				});
+				return;
+			}
+
+			if (xhr.status < 200 || xhr.status >= 300) {
+				reject('HTTP Error: ' + xhr.status);
+				return;
+			}
+
+			const json = JSON.parse(xhr.responseText);
+
+			if (!json || typeof json.location != 'string') {
+				reject('invalid JSON: ' + xhr.responseText);
+				return;
+			}
+
+			resolve(json.location);
+		};
+		xhr.onerror = () => {
+			reject('Image upload failded due to a XHR transport error. code: ' + xhr.status);
+		}
+
+		const formData = new FormData();
+		formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+		xhr.send(formData);
+
+	});
+
+
+	tinymce.init({
+		selector: 'textarea#default',
+
+		height: 700,
+		plugins: [
+			'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'prewiew', ' anchor', 'pagebreak',
+			'searchreplace', 'wordcount', 'visualblocks', 'code', 'fullscreen', 'insertdatetime', 'media',
+			'table', 'emoticons', 'template', 'codesample'
+		],
+		toolbar: 'undo redo | styles | bold italic underline | alignleft aligncenter alignright alignjustify ' +
+			'bullist numlist outdent indent | link image | print preview media fullscreen ' +
+			'forecolor backcolor emoticons',
+		images_upload_url: '/application/views/upload.php',
+		images_upload_handler: image_upload_handler_callback,
+		menu: {
+			favs: {
+				title: 'menu',
+				items: 'code visualaid | searchreplace | emoticons'
+			}
+		},
+		menubar: 'favs file edit view insert format tools table',
+		content_style: 'body{font-family: Helvetica, Arial, san-serif; font-size: 16px}'
+	});
+</script>
+
 
 <script>
 	(function($) {

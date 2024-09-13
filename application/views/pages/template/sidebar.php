@@ -3,7 +3,7 @@
 	<div class="top-bar">
 		<div class="content-topbar flex-sb-m h-full container">
 			<div class="left-top-bar">
-				Free shipping for standard order over $100
+				truongnhat.nguyen.41@gmail.com
 			</div>
 
 			<div class="right-top-bar flex-w h-full">
@@ -12,15 +12,15 @@
 				</a>
 
 				<a href="#" class="flex-c-m trans-04 p-lr-25">
-					My Account
+					+84 777722438
 				</a>
 
 				<a href="#" class="flex-c-m trans-04 p-lr-25">
-					EN
+					VN
 				</a>
 
 				<a href="#" class="flex-c-m trans-04 p-lr-25">
-					USD
+					VND
 				</a>
 			</div>
 		</div>
@@ -31,7 +31,7 @@
 
 			<!-- Logo desktop -->
 			<a href="<?= base_url('') ?>" class="logo">
-				<img src="<?= base_url('') ?>/link/images/icons/logo-01.png" alt="IMG-LOGO">
+				<img src="<?= base_url('') ?>link/images/icons/logo-01.png" alt="IMG-LOGO">
 			</a>
 
 			<!-- Menu desktop -->

@@ -15,6 +15,12 @@ class IndexModel extends CI_Model
 		return $query->result();
 	}
 
+	public function getUserHome()
+	{
+		$query =  $this->db->get_where('customers', ['status' => 1]);
+		return $query->result();
+	}
+
 	public function getAllProduct()
 	{
 		$query =  $this->db->get_where('products', ['status' => 1]);

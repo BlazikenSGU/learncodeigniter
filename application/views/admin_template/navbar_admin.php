@@ -1,7 +1,7 @@
 <div class="section-menu-left">
 	<div class="box-logo">
 		<a href="#" id="site-logo-inner">
-			<img class="" id="logo_header" alt="" src="/frontend/admin/images/logo/logo.png" data-light="frontend/admin/images/logo/logo.png" data-dark="frontend/admin/images/logo/logo.png">
+			<img class="" id="logo_header" alt="" src="<?= base_url()?>link/images/icons/logo-01.png" data-light="frontend/admin/images/logo/logo.png" data-dark="frontend/admin/images/logo/logo.png">
 		</a>
 		<div class="button-show-hide">
 			<i class="icon-menu-left"></i>

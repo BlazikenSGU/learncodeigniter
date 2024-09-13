@@ -251,22 +251,22 @@
 
 										<select class="xulidonhang form-control" style="width: max-content;">
 											<?php
-											if ($bra->order_status == 0) {
+											if ($bra->order_status == 1) {
 											?>
-												<option selected id="<?= $bra->order_code ?>" value="0">--- Xu li don hang ---</option>
+												<option selected id="<?= $bra->order_code ?>" value="1">--- Xu li don hang ---</option>
 												<option id="<?= $bra->order_code ?>" value="2">Dang giao hang</option>
 												<option id="<?= $bra->order_code ?>" value="3">Huy don</option>
 											<?php
 											} elseif ($bra->order_status == 2) {
 
 											?>
-												<option id="<?= $bra->order_code ?>" value="0">--- Xu li don hang ---</option>
+												<option id="<?= $bra->order_code ?>" value="1">--- Xu li don hang ---</option>
 												<option selected id="<?= $bra->order_code ?>" value="2">Dang giao hang</option>
 												<option id="<?= $bra->order_code ?>" value="3">Huy don</option>
 											<?php
-											} else {
+											} elseif ($bra->order_status == 3) {
 											?>
-												<option id="<?= $bra->order_code ?>" value="0">--- Xu li don hang ---</option>
+												<option id="<?= $bra->order_code ?>" value="1">--- Xu li don hang ---</option>
 												<option id="<?= $bra->order_code ?>" value="2">Dang giao hang</option>
 												<option selected id="<?= $bra->order_code ?>" value="3">Huy don</option>
 											<?php } ?>

@@ -35,6 +35,7 @@
 							<div class="main-content-wrap">
 								<div class="flex items-center flex-wrap justify-between gap20 mb-27">
 									<h3>Add Product</h3>
+				
 									<ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
 										<li>
 											<a href="index-2.html">
@@ -124,7 +125,7 @@
 											<div class="body-title mb-10">Description <span class="tf-color-1">*</span>
 											</div>
 
-											<textarea class="mb-10" name="description" tabindex="0" aria-required="true" required=""></textarea>
+											<textarea class="mb-10" id="default" name="description" tabindex="0" aria-required="true" ></textarea>
 
 										</fieldset>
 									</div>

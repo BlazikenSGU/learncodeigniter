@@ -184,8 +184,10 @@
 											<div class="body-title mb-10">Description <span class="tf-color-1">*</span>
 											</div>
 
-											<textarea placeholder="Post	 Description" class="mb-10" name="content" tabindex="0" aria-required="true" required=""><?= $post->content ?></textarea>
+											<!-- <textarea placeholder="Post	 Description" class="mb-10" name="content" tabindex="0" aria-required="true" required=""><?= $post->content ?></textarea> -->
+											<textarea class="mb-10" id="default" name="content" tabindex="0" aria-required="true" ><?= $post->content ?></textarea>
 
+											
 										</fieldset>
 
 										<fieldset>

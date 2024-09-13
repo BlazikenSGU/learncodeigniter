@@ -100,7 +100,8 @@
 											<div class="body-title mb-10">Description <span class="tf-color-1">*</span>
 											</div>
 
-											<textarea placeholder="Post content" class="mb-10" name="content" tabindex="0" aria-required="true" required=""></textarea>
+											<!-- <textarea placeholder="Post content" class="mb-10" name="content" tabindex="0" aria-required="true" required=""></textarea> -->
+											<textarea class="mb-10" id="default" name="content" tabindex="0" aria-required="true" ></textarea>
 
 										</fieldset>
 

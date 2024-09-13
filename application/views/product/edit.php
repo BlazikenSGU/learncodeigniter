@@ -124,8 +124,8 @@
 										<fieldset class="description">
 											<div class="body-title mb-10">Description <span class="tf-color-1">*</span>
 											</div>
-
-											<textarea class="mb-10" name="description" tabindex="0" aria-required="true" required=""><?= $product->description ?></textarea>
+											<textarea class="mb-10" id="default" name="description" tabindex="0" aria-required="true" ><?= $product->description ?></textarea>
+											<!-- <textarea class="mb-10" name="description" tabindex="0" aria-required="true" required=""><?= $product->description ?></textarea> -->
 
 										</fieldset>
 									</div>

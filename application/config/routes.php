@@ -26,7 +26,8 @@ $route['tim-kiem']['GET'] = 'IndexController/tim_kiem';
 $route['shop']['GET'] = 'IndexController/shop';
 $route['about']['GET'] = 'IndexController/about';
 $route['user']['GET'] = 'IndexController/user';
-
+$route['user-history']['GET'] = 'IndexController/user_history';
+$route['resume']['GET'] = 'IndexController/resume';
 
 
 //pagination

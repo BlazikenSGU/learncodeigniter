@@ -19,25 +19,25 @@
 				<ul class="row_footer">
 					<li class="p-b-10">
 						<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-							Women
+							Nike
 						</a>
 					</li>
 
 					<li class="p-b-10">
 						<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-							Men
+							Adidas
 						</a>
 					</li>
 
 					<li class="p-b-10">
 						<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-							Shoes
+							Puma
 						</a>
 					</li>
 
 					<li class="p-b-10">
 						<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-							Watches
+							Mizuno
 						</a>
 					</li>
 				</ul>
@@ -57,13 +57,13 @@
 
 					<li class="p-b-10">
 						<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-							Returns
+							Contact
 						</a>
 					</li>
 
 					<li class="p-b-10">
 						<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-							Shipping
+							Account
 						</a>
 					</li>
 
@@ -77,11 +77,13 @@
 
 			<div class="col-sm-6 col-lg-3 p-b-50">
 				<h4 class="stext-301 cl0 p-b-30">
-					GET IN TOUCH
+					Contact
 				</h4>
 
 				<p class="stext-107 cl7 size-201">
-					Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+					45B Ung Van Khiem, Phuong 26, Quan Binh Thanh, TPHCM.
+					<br>
+					+84 777722438.
 				</p>
 
 				<div class="p-t-27">
@@ -146,7 +148,7 @@
 
 				Copyright &copy;<script>
 					document.write(new Date().getFullYear());
-				</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> distributed by BlazikenSGU.
+				</script> All rights reserved by BlazikenSGU.
 
 
 			</p>

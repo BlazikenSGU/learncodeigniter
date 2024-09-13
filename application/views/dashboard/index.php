@@ -309,7 +309,7 @@
 														</div>
 														<div>
 															<div class="body-text mb-2">Total Amount</div>
-															<h4>481.34</h4>
+															<h4>7</h4>
 														</div>
 													</div>
 												</div>
@@ -324,7 +324,7 @@
 														</div>
 														<div>
 															<div class="body-text mb-2">Pending Orders</div>
-															<h4>3</h4>
+															<h4>7</h4>
 														</div>
 													</div>
 												</div>
@@ -339,7 +339,7 @@
 														</div>
 														<div>
 															<div class="body-text mb-2">Pending Orders Amount</div>
-															<h4>481.34</h4>
+															<h4>7</h4>
 														</div>
 													</div>
 												</div>
@@ -357,7 +357,7 @@
 														</div>
 														<div>
 															<div class="body-text mb-2">Delivered Orders</div>
-															<h4>0</h4>
+															<h4>7</h4>
 														</div>
 													</div>
 												</div>
@@ -372,7 +372,7 @@
 														</div>
 														<div>
 															<div class="body-text mb-2">Delivered Orders Amount</div>
-															<h4>0.00</h4>
+															<h4>7</h4>
 														</div>
 													</div>
 												</div>
@@ -387,7 +387,7 @@
 														</div>
 														<div>
 															<div class="body-text mb-2">Canceled Orders</div>
-															<h4>0</h4>
+															<h4>7</h4>
 														</div>
 													</div>
 												</div>
@@ -402,7 +402,7 @@
 														</div>
 														<div>
 															<div class="body-text mb-2">Canceled Orders Amount</div>
-															<h4>0.00</h4>
+															<h4>7</h4>
 														</div>
 													</div>
 												</div>
@@ -438,7 +438,7 @@
 													</div>
 												</div>
 												<div class="flex items-center gap10">
-													<h4>$37,802</h4>
+													<h4>7</h4>
 													<div class="box-icon-trending up">
 														<i class="icon-trending-up"></i>
 														<div class="body-title number">0.56%</div>
@@ -453,7 +453,7 @@
 													</div>
 												</div>
 												<div class="flex items-center gap10">
-													<h4>$28,305</h4>
+													<h4>7</h4>
 													<div class="box-icon-trending up">
 														<i class="icon-trending-up"></i>
 														<div class="body-title number">0.56%</div>
@@ -498,11 +498,11 @@
 													<tbody>
 														<tr>
 															<td class="text-center">1</td>
-															<td class="text-center">Divyansh Kumar</td>
-															<td class="text-center">1234567891</td>
-															<td class="text-center">$172.00</td>
-															<td class="text-center">$36.12</td>
-															<td class="text-center">$208.12</td>
+															<td class="text-center">a</td>
+															<td class="text-center">1</td>
+															<td class="text-center">1</td>
+															<td class="text-center">1</td>
+															<td class="text-center">1</td>
 
 															<td class="text-center">ordered</td>
 															<td class="text-center">2024-07-11 00:54:14</td>
@@ -531,7 +531,7 @@
 
 
 						<div class="bottom-page">
-							<div class="body-text">Copyright © 2024 SurfsideMedia</div>
+							<div class="body-text">Copyright © 2024 BlazikenSGU</div>
 						</div>
 					</div>
 
